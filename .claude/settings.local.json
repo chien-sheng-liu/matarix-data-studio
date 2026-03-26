@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:www.epic.net)",
+      "Bash(npx:*)",
+      "Bash(yes \"\")"
+    ]
+  }
+}
