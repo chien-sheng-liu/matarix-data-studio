@@ -26,7 +26,7 @@ const jetbrainsMono = JetBrains_Mono({
 
 const notoSansTc = Noto_Sans_TC({
   variable: "--font-noto-sans-tc",
-  subsets: ["latin", "cyrillic"],
+  subsets: ["latin"],
   display: "swap",
   weight: ["400", "500", "700"],
 });

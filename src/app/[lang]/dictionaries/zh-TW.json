@@ -19,21 +19,50 @@
     "label": "關於我們",
     "heading": "我們會說數據的語言",
     "description": "擁有超過十年的數據工程、機器學習和商業智能方面的綜合專業知識，我們幫助組織發揮數據的真正潛力。",
+    "intro": {
+      "title": "關於我們",
+      "narrative": "Mentarix Data Studio 是一家專業的數據工程與 AI 顧問公司。過去 5 年間，我們已協助超過 20 家企業、橫跨 10 個產業，將原始數據轉化為可衡量的商業成果——從建構 PB 級數據管線到部署生產級機器學習模型。",
+      "whyUs": "客戶選擇我們的原因",
+      "differentiators": [
+        {
+          "title": "端到端全程負責",
+          "description": "從數據基礎設施到 AI 部署，由同一團隊全權處理。"
+        },
+        {
+          "title": "生產級工程品質",
+          "description": "我們構建的是能在規模化環境中穩定運行的系統，而非僅是原型。"
+        },
+        {
+          "title": "跨產業實戰經驗",
+          "description": "在金融科技、醫療、電商、製造等多個產業中擁有成熟解決方案。"
+        }
+      ]
+    },
     "capabilities": {
-      "dataEngineering": "數據工程",
-      "aiMl": "AI / 機器學習",
-      "visualization": "數據視覺化",
-      "strategy": "策略規劃"
+      "dataEngineering": {
+        "title": "數據工程",
+        "description": "可擴展管線、雲原生基礎設施與 PB 級即時串流處理。"
+      },
+      "aiMl": {
+        "title": "AI / 機器學習",
+        "description": "從 NLP 到電腦視覺的客製化模型，以您的數據訓練並部署至生產環境。"
+      },
+      "analytics": {
+        "title": "數據分析",
+        "description": "互動式儀表板與深度分析，將數字轉化為策略決策。"
+      },
+      "strategy": {
+        "title": "策略顧問",
+        "description": "數據路線圖、架構評估與組織轉型指導。"
+      }
     },
     "stats": {
-      "projectsDelivered": "完成專案",
+      "yearsExperience": "年經驗",
+      "clientsHandled": "服務客戶",
       "dataProcessed": "已處理數據",
-      "clientsServed": "服務客戶",
-      "yearsExperience": "年經驗"
+      "industriesCovered": "覆蓋行業"
     },
-    "coreCapabilities": "核心能力",
-    "monthlyGrowth": "月度增長",
-    "months": ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"]
+    "coreCapabilities": "核心能力"
   },
   "services": {
     "label": "我們的服務",
@@ -67,29 +96,34 @@
   },
   "projects": {
     "label": "精選作品",
-    "heading": "我們的專案",
+    "heading": "專案案例",
     "viewCaseStudy": "查看案例研究",
     "keyMetrics": "關鍵指標",
     "projects": [
       {
-        "title": "實時分析平台",
-        "category": "數據工程",
-        "description": "為主要電商平台構建分佈式流媒體平台，每秒處理 100,000+ 個事件。"
+        "title": "股票多代理人財務分析平台",
+        "category": "LLM",
+        "description": "結合 LLM Gateway 與 Playwright 瀏覽器自動化的金融分析平台，透過新聞、財務、交易員與數據代理人的多代理人協作，搭載安全防護層與完整的工件可追溯性。"
       },
       {
-        "title": "預測性維護系統",
-        "category": "機器學習",
-        "description": "部署機器學習模型，通過預測故障檢測將設備停機時間減少 40%。"
+        "title": "海事高風險與異常行為預測",
+        "category": "深度學習",
+        "description": "整合國家氣象數據、船舶靜態資料與即時 AIS 串流至 ClickHouse，結合深度學習預測擱淺及異常行為，協助預防海事事故。"
       },
       {
-        "title": "客戶洞察儀表板",
-        "category": "數據分析",
-        "description": "創建實時儀表板，分析 5 億+ 個客戶互動，實現個性化營銷。"
+        "title": "COVID-19 衝擊下的時間序列預測",
+        "category": "深度學習",
+        "description": "比較 SARIMA、Holt-Winters 與 Prophet 在 COVID-19 衝擊下的表現，設計三組實驗量化外部衝擊對時間序列預測精度的影響。"
       },
       {
-        "title": "供應鏈最優化",
-        "category": "人工智能策略",
-        "description": "實施人工智能驅動的物流最優化，將運營成本降低 25%。"
+        "title": "角子機引擎與機率優化器",
+        "category": "演算法",
+        "description": "3×3 角子機引擎，結合蒙地卡羅模擬與啟發式搜尋，在 RTP 95% 與勝率 ≥55% 的約束下自動優化捲軸配置，採 FastAPI 後端與 React 前端全端實作。"
+      },
+      {
+        "title": "AutoLLM — 無程式碼 RAG 聊天機器人平台",
+        "category": "LLM",
+        "description": "生產級 RAG 平台，支援文件上傳、向量檢索、多 LLM 切換，具備 Redis + PostgreSQL 雙層儲存架構與 Docker 微服務部署。"
       }
     ]
   },
@@ -98,24 +132,24 @@
     "heading": "工作流程",
     "steps": [
       {
-        "title": "發現階段",
-        "description": "我們深入了解您的數據環境、挑戰和目標，以理解成功的含義。"
+        "title": "顧問諮詢",
+        "description": "初步諮詢，了解您的業務背景、數據成熟度與策略目標。"
       },
       {
-        "title": "架構設計",
-        "description": "根據您的技術堆棧和業務需求設計可擴展、堅固的解決方案。"
+        "title": "需求訪談",
+        "description": "深入利害關係人訪談，蒐集詳細的功能與技術需求。"
       },
       {
-        "title": "實施部署",
-        "description": "構建、測試和部署解決方案，零停機，維持最高質量標準。"
+        "title": "需求規格確認",
+        "description": "將需求正式化為完整的規格文件，包含驗收標準與專案範圍。"
       },
       {
-        "title": "性能優化",
-        "description": "監控性能，收集見解，根據實際使用情況持續改進系統。"
+        "title": "實作",
+        "description": "採用敏捷開發，迭代交付、持續測試，並定期進行進度檢討。"
       },
       {
-        "title": "持續支持",
-        "description": "提供持續維護、更新和戰略指導，滿足不斷演變的數據需求。"
+        "title": "結案分析報告",
+        "description": "完整的專案結案報告，包含績效指標、洞察分析與未來優化建議。"
       }
     ]
   },
