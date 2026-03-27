@@ -19,21 +19,50 @@
     "label": "About Us",
     "heading": "We speak the language of data",
     "description": "With over a decade of combined expertise in data engineering, machine learning, and business intelligence, we help organizations unlock the true potential of their data.",
+    "intro": {
+      "title": "Who We Are",
+      "narrative": "Mentarix Data Studio is a specialized data engineering and AI consultancy. Over the past 5 years, we have helped 20+ organizations across 10 industries transform raw data into measurable business outcomes — from building petabyte-scale pipelines to deploying production ML models.",
+      "whyUs": "Why Clients Choose Us",
+      "differentiators": [
+        {
+          "title": "End-to-End Ownership",
+          "description": "From data infrastructure to AI deployment, one team handles the entire stack."
+        },
+        {
+          "title": "Production-Grade Engineering",
+          "description": "We build systems that run reliably at scale, not just prototypes."
+        },
+        {
+          "title": "Cross-Industry Expertise",
+          "description": "Proven solutions across fintech, healthcare, e-commerce, manufacturing, and more."
+        }
+      ]
+    },
     "capabilities": {
-      "dataEngineering": "Data Engineering",
-      "aiMl": "AI / ML",
-      "visualization": "Visualization",
-      "strategy": "Strategy"
+      "dataEngineering": {
+        "title": "Data Engineering",
+        "description": "Scalable pipelines, cloud-native infrastructure, and real-time streaming at petabyte scale."
+      },
+      "aiMl": {
+        "title": "AI / Machine Learning",
+        "description": "Custom models from NLP to computer vision, trained on your data and deployed to production."
+      },
+      "analytics": {
+        "title": "Data Analytics",
+        "description": "Interactive dashboards and deep-dive analysis that turn numbers into strategic decisions."
+      },
+      "strategy": {
+        "title": "Strategy & Consulting",
+        "description": "Data roadmaps, architecture reviews, and organizational transformation guidance."
+      }
     },
     "stats": {
-      "projectsDelivered": "Projects Delivered",
+      "yearsExperience": "Years Experience",
+      "clientsHandled": "Clients Handled",
       "dataProcessed": "Data Processed",
-      "clientsServed": "Clients Served",
-      "yearsExperience": "Years Experience"
+      "industriesCovered": "Industries Covered"
     },
-    "coreCapabilities": "Core Capabilities",
-    "monthlyGrowth": "Monthly Growth",
-    "months": ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+    "coreCapabilities": "Core Capabilities"
   },
   "services": {
     "label": "What We Do",
@@ -72,24 +101,29 @@
     "keyMetrics": "Key Metrics",
     "projects": [
       {
-        "title": "Real-time Analytics Platform",
-        "category": "Data Engineering",
-        "description": "Built a distributed streaming platform processing 100K+ events per second for a major e-commerce platform."
+        "title": "Stock Multi-Agent Financial Analyzer",
+        "category": "LLM",
+        "description": "Financial analysis platform combining an LLM Gateway with Playwright browser automation. Multi-agent collaboration across news, finance, trader, and data agents with Safety Guard and full artifact traceability."
       },
       {
-        "title": "Predictive Maintenance System",
-        "category": "Machine Learning",
-        "description": "Deployed ML model reducing equipment downtime by 40% through predictive failure detection."
+        "title": "Maritime High-Risk & Anomaly Prediction",
+        "category": "Deep Learning",
+        "description": "Integrated national weather, vessel static data, and real-time AIS streams into ClickHouse and deep learning to predict grounding and anomalous behaviors and help prevent maritime incidents."
       },
       {
-        "title": "Customer Insights Dashboard",
-        "category": "Data Analytics",
-        "description": "Created real-time dashboard analyzing 500M+ customer interactions, enabling personalized marketing."
+        "title": "Disrupted Time-Series Forecasting",
+        "category": "Deep Learning",
+        "description": "Compared SARIMA, Holt-Winters, and Prophet under COVID-19 disruptions. Designed three experimental groups to quantify the impact of external shocks on time-series forecasting accuracy."
       },
       {
-        "title": "Supply Chain Optimization",
-        "category": "AI Strategy",
-        "description": "Implemented AI-powered logistics optimization reducing operational costs by 25%."
+        "title": "Slot Game Engine & Probability Optimizer",
+        "category": "Algorithm",
+        "description": "3x3 slot game engine combining Monte Carlo simulation with heuristic search to auto-optimize reel configurations under RTP 95% and win rate constraints. Full-stack with FastAPI backend and React frontend."
+      },
+      {
+        "title": "AutoLLM — No-Code RAG Chatbot Platform",
+        "category": "LLM",
+        "description": "Production-grade RAG platform with document upload, vector retrieval, multi-LLM switching, dual-layer Redis + PostgreSQL storage, and Docker microservice deployment."
       }
     ]
   },
@@ -98,24 +132,24 @@
     "heading": "Our Process",
     "steps": [
       {
-        "title": "Discovery",
-        "description": "We dive deep into your data landscape, challenges, and goals to understand what success looks like."
+        "title": "Consulting",
+        "description": "Initial consultation to understand your business context, data maturity, and strategic objectives."
       },
       {
-        "title": "Architecture",
-        "description": "Design scalable, robust solutions tailored to your technical stack and business requirements."
+        "title": "Requirements Interview",
+        "description": "In-depth stakeholder interviews to capture detailed functional and technical requirements."
+      },
+      {
+        "title": "Requirements Specification",
+        "description": "Formalize requirements into a comprehensive specification document with acceptance criteria and project scope."
       },
       {
         "title": "Implementation",
-        "description": "Build, test, and deploy solutions with zero downtime, maintaining the highest quality standards."
+        "description": "Agile development with iterative delivery, continuous testing, and regular progress reviews."
       },
       {
-        "title": "Optimization",
-        "description": "Monitor performance, gather insights, and continuously improve systems based on real-world usage."
-      },
-      {
-        "title": "Support",
-        "description": "Provide ongoing maintenance, updates, and strategic guidance as your data needs evolve."
+        "title": "Final Analysis Report",
+        "description": "Comprehensive project closure report with performance metrics, insights, and recommendations for future optimization."
       }
     ]
   },

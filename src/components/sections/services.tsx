@@ -31,6 +31,16 @@ const accentColors = [
   "#EC4899",
 ];
 
+// Stable bar heights per service to avoid hydration mismatch
+const barHeights = [
+  [45, 70, 30, 85, 55, 90, 40, 65, 75, 50, 80, 35],
+  [60, 40, 80, 55, 70, 35, 90, 45, 65, 75, 50, 85],
+  [35, 80, 50, 70, 40, 90, 60, 45, 75, 55, 85, 30],
+  [75, 45, 85, 35, 65, 80, 50, 90, 40, 70, 55, 60],
+  [50, 85, 40, 75, 60, 35, 80, 55, 90, 45, 70, 65],
+  [80, 35, 65, 90, 45, 70, 55, 85, 40, 60, 75, 50],
+];
+
 export function ServicesSection() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
@@ -51,40 +61,39 @@ export function ServicesSection() {
 
         <TextReveal
           as="h2"
-          className="font-heading text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl mb-16 justify-center"
+          className="font-heading text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl mb-12 justify-center"
         >
           {dictionary.services.heading}
         </TextReveal>
 
-        {/* Interactive accordion-style list */}
-        <div className="max-w-4xl mx-auto space-y-2">
+        {/* 3×2 grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {services.map((service, i) => {
             const isActive = activeIndex === i;
             const color = accentColors[i % accentColors.length];
+            const dictService = (dictionary.services.services as Array<{ title: string; description: string }>)[i];
+            const title = dictService?.title || service.title;
+            const description = dictService?.description || service.description;
 
             return (
               <motion.div
-                key={service.title}
-                initial={{ opacity: 0, x: -40 }}
-                animate={isInView ? { opacity: 1, x: 0 } : {}}
-                transition={{ duration: 0.6, delay: 0.15 + i * 0.08 }}
+                key={`service-${i}`}
+                initial={{ opacity: 0, y: 24, scale: 0.95 }}
+                animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
+                transition={{ duration: 0.5, delay: 0.1 + i * 0.08, ease: [0.16, 1, 0.3, 1] }}
                 onMouseEnter={() => setActiveIndex(i)}
                 onMouseLeave={() => setActiveIndex(null)}
-                className="group cursor-pointer border-b border-border/50"
+                className="group cursor-default rounded-2xl border border-border/50 p-5 bg-background/60 backdrop-blur-sm hover:border-border transition-all duration-300"
+                style={{
+                  borderColor: isActive ? `${color}40` : undefined,
+                  background: isActive ? `${color}08` : undefined,
+                }}
               >
-                <div className="flex items-center gap-6 py-6 px-4">
-                  {/* Number */}
-                  <span
-                    className="font-mono text-sm transition-colors duration-300"
-                    style={{ color: isActive ? color : "#64748B" }}
-                  >
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-
-                  {/* Icon with draw animation */}
+                {/* Top row: icon + number */}
+                <div className="flex items-center justify-between mb-4">
                   <motion.div
                     animate={{
-                      scale: isActive ? 1.2 : 1,
+                      scale: isActive ? 1.15 : 1,
                       rotate: isActive ? 5 : 0,
                     }}
                     transition={{ duration: 0.3 }}
@@ -111,72 +120,48 @@ export function ServicesSection() {
                     </svg>
                   </motion.div>
 
-                  {/* Title */}
-                  <h3
-                    className="font-heading text-xl sm:text-2xl font-semibold flex-1 transition-colors duration-300"
-                    style={{ color: isActive ? color : undefined }}
+                  <span
+                    className="font-mono text-xs font-bold transition-colors duration-300"
+                    style={{ color: isActive ? color : "#64748B" }}
                   >
-                    {service.title}
-                  </h3>
-
-                  {/* Expand arrow */}
-                  <motion.svg
-                    animate={{ rotate: isActive ? 180 : 0 }}
-                    transition={{ duration: 0.3 }}
-                    className="w-5 h-5 text-muted"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    strokeWidth={2}
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M19 9l-7 7-7-7"
-                    />
-                  </motion.svg>
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
                 </div>
 
-                {/* Expanded content */}
-                <AnimatePresence>
-                  {isActive && (
+                {/* Title */}
+                <h3
+                  className="font-heading text-base font-semibold mb-2 transition-colors duration-300 leading-snug"
+                  style={{ color: isActive ? color : undefined }}
+                >
+                  {title}
+                </h3>
+
+                {/* Description */}
+                <p className="text-xs text-muted leading-relaxed mb-4">
+                  {description}
+                </p>
+
+                {/* Mini bar chart — always rendered, animates on hover */}
+                <div className="flex gap-0.5 items-end h-7">
+                  {barHeights[i].map((h, j) => (
                     <motion.div
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: "auto", opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                      className="overflow-hidden"
-                    >
-                      <div className="px-4 pb-6 pl-[88px]">
-                        <p className="text-muted leading-relaxed max-w-lg">
-                          {service.description}
-                        </p>
-                        {/* Mini data visualization */}
-                        <div className="mt-4 flex gap-1 items-end h-8">
-                          {Array.from({ length: 12 }, (_, j) => (
-                            <motion.div
-                              key={j}
-                              initial={{ height: 0 }}
-                              animate={{
-                                height: `${20 + Math.random() * 80}%`,
-                              }}
-                              transition={{
-                                duration: 0.5,
-                                delay: j * 0.04,
-                                ease: [0.16, 1, 0.3, 1],
-                              }}
-                              className="w-2 rounded-full"
-                              style={{
-                                backgroundColor: color,
-                                opacity: 0.3 + Math.random() * 0.7,
-                              }}
-                            />
-                          ))}
-                        </div>
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
+                      key={j}
+                      className="flex-1 rounded-full"
+                      style={{
+                        backgroundColor: color,
+                        opacity: isActive ? 0.3 + (h / 100) * 0.7 : 0.12,
+                      }}
+                      animate={{
+                        height: isActive ? `${h}%` : "20%",
+                      }}
+                      transition={{
+                        duration: 0.4,
+                        delay: isActive ? j * 0.03 : 0,
+                        ease: [0.16, 1, 0.3, 1],
+                      }}
+                    />
+                  ))}
+                </div>
               </motion.div>
             );
           })}

@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useEffect, useState } from "react";
-import { useInView } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 
 interface AnimatedCounterProps {
   value: number;
@@ -17,6 +17,7 @@ export function AnimatedCounter({
   const ref = useRef<HTMLSpanElement>(null);
   const isInView = useInView(ref, { once: true });
   const [display, setDisplay] = useState("0");
+  const [completed, setCompleted] = useState(false);
 
   useEffect(() => {
     if (!isInView) return;
@@ -34,6 +35,8 @@ export function AnimatedCounter({
 
       if (progress < 1) {
         requestAnimationFrame(update);
+      } else {
+        setCompleted(true);
       }
     }
 
@@ -41,9 +44,28 @@ export function AnimatedCounter({
   }, [isInView, value, duration]);
 
   return (
-    <span ref={ref}>
-      {display}
-      {suffix}
-    </span>
+    <motion.span
+      ref={ref}
+      animate={
+        completed
+          ? { textShadow: ["0 0 0px transparent", "0 0 20px rgba(124, 58, 237, 0.6)", "0 0 0px transparent"] }
+          : { textShadow: "0 0 0px transparent" }
+      }
+      transition={{ duration: 0.8 }}
+    >
+      <motion.span
+        animate={completed ? { scale: [1, 1.15, 1] } : {}}
+        transition={{ type: "tween", duration: 0.4, ease: [0.34, 1.56, 0.64, 1] }}
+      >
+        {display}
+      </motion.span>
+      <motion.span
+        initial={{ opacity: 0, scale: 0.5, y: -4 }}
+        animate={completed ? { opacity: 1, scale: 1, y: 0 } : {}}
+        transition={{ type: "spring", stiffness: 300, damping: 15, delay: 0.08 }}
+      >
+        {suffix}
+      </motion.span>
+    </motion.span>
   );
 }

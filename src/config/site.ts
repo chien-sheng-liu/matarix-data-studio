@@ -57,71 +57,63 @@ export const services = [
 
 export const projects = [
   {
-    title: "Predictive Analytics Platform",
-    category: "AI / Machine Learning",
+    title: "Stock Multi-Agent Financial Analyzer",
+    category: "LLM",
     description:
-      "Built a real-time predictive analytics engine processing 2M+ events/day for a fintech company, reducing risk assessment time by 73%.",
+      "Financial analysis platform combining an LLM Gateway with Playwright browser automation. Multi-agent collaboration across news, finance, trader, and data agents with Safety Guard and full artifact traceability.",
     color: "#6366F1",
+    technologies: ["FastAPI", "Playwright", "React", "OpenAI", "Claude", "Docker", "Python"],
+    metrics: ["4 Agents", "5 Safety Layers", "3+ LLM Providers"],
   },
   {
-    title: "Smart City Data Hub",
-    category: "Big Data Architecture",
+    title: "Maritime High-Risk & Anomaly Prediction",
+    category: "Deep Learning",
     description:
-      "Designed a citywide IoT data platform integrating 50K+ sensors, enabling real-time traffic optimization and energy management.",
+      "Integrated national weather, vessel static data, and real-time AIS streams into ClickHouse and deep learning to predict grounding and anomalous behaviors and help prevent maritime incidents.",
     color: "#06B6D4",
+    technologies: ["Deep Learning", "ClickHouse", "Streaming SQL", "AIS", "Python"],
+    metrics: ["15+ Sources", "20TB+ Data", "On-prem Deploy"],
   },
   {
-    title: "E-Commerce Intelligence Suite",
-    category: "Data Visualization",
+    title: "Disrupted Time-Series Forecasting",
+    category: "Deep Learning",
     description:
-      "Created an interactive analytics dashboard that increased conversion rates by 34% through real-time customer behavior insights.",
+      "Compared SARIMA, Holt-Winters, and Prophet under COVID-19 disruptions. Designed three experimental groups to quantify the impact of external shocks on time-series forecasting accuracy.",
     color: "#8B5CF6",
+    technologies: ["Python", "SARIMA", "Prophet", "Holt-Winters", "pandas", "statsmodels"],
+    metrics: ["3 Models", "3 Experiments", "Uni Mannheim"],
   },
   {
-    title: "Healthcare NLP System",
-    category: "AI Integration",
+    title: "Slot Game Engine & Probability Optimizer",
+    category: "Algorithm",
     description:
-      "Developed a medical document analysis system using NLP, automating 85% of clinical data extraction for a hospital network.",
-    color: "#10B981",
+      "3×3 slot game engine combining Monte Carlo simulation with heuristic search to auto-optimize reel configurations under RTP 95% and win rate ≥55% constraints. Full-stack with FastAPI backend and React frontend.",
+    color: "#F59E0B",
+    technologies: ["Python", "FastAPI", "React", "Monte Carlo", "NumPy", "Vite"],
+    metrics: ["95% Target RTP", "100K Simulations", "5 Win Patterns"],
+  },
+  {
+    title: "AutoLLM — No-Code RAG Chatbot Platform",
+    category: "LLM",
+    description:
+      "Production-grade RAG platform with document upload, vector retrieval, multi-LLM switching, dual-layer Redis + PostgreSQL storage, and Docker microservice deployment.",
+    color: "#EC4899",
+    technologies: ["FastAPI", "Next.js", "PostgreSQL", "pgvector", "Redis", "Docker", "OpenAI"],
+    metrics: ["3+ LLM Providers", "15+ API Endpoints", "Docker Deploy"],
   },
 ] as const;
 
 export const processSteps = [
-  {
-    step: "01",
-    title: "Discovery",
-    description:
-      "Deep dive into your data landscape, business goals, and technical requirements.",
-  },
-  {
-    step: "02",
-    title: "Analysis",
-    description:
-      "Assess data quality, identify patterns, and design the optimal architecture.",
-  },
-  {
-    step: "03",
-    title: "Build",
-    description:
-      "Engineer robust solutions with iterative development and continuous validation.",
-  },
-  {
-    step: "04",
-    title: "Deploy",
-    description:
-      "Launch with comprehensive testing, monitoring, and performance optimization.",
-  },
-  {
-    step: "05",
-    title: "Iterate",
-    description:
-      "Continuously improve models and systems based on real-world performance data.",
-  },
+  { step: "01", title: "Consulting", description: "Initial consultation to understand your business context, data maturity, and strategic objectives." },
+  { step: "02", title: "Requirements Interview", description: "In-depth stakeholder interviews to capture detailed functional and technical requirements." },
+  { step: "03", title: "Requirements Specification", description: "Formalize requirements into a comprehensive specification document with acceptance criteria and project scope." },
+  { step: "04", title: "Implementation", description: "Agile development with iterative delivery, continuous testing, and regular progress reviews." },
+  { step: "05", title: "Final Analysis Report", description: "Comprehensive project closure report with performance metrics, insights, and recommendations for future optimization." },
 ] as const;
 
 export const stats = [
-  { value: 50, suffix: "+", label: "Projects Delivered" },
+  { value: 5, suffix: "+", label: "Years Experience" },
+  { value: 20, suffix: "+", label: "Clients Handled" },
   { value: 10, suffix: "PB+", label: "Data Processed" },
-  { value: 99.9, suffix: "%", label: "System Uptime" },
-  { value: 30, suffix: "+", label: "Enterprise Clients" },
+  { value: 10, suffix: "+", label: "Industries Covered" },
 ] as const;
