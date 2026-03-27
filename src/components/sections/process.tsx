@@ -3,6 +3,7 @@
 import { useRef } from "react";
 import { motion, useScroll, useTransform, useInView } from "framer-motion";
 import { TextReveal } from "@/components/effects/text-reveal";
+import { useLocale } from "@/components/providers/locale-provider";
 import { processSteps } from "@/config/site";
 
 const stepColors = ["#6366F1", "#8B5CF6", "#06B6D4", "#10B981", "#F59E0B"];
@@ -11,6 +12,7 @@ export function ProcessSection() {
   const containerRef = useRef<HTMLDivElement>(null);
   const headerRef = useRef(null);
   const headerInView = useInView(headerRef, { once: true, margin: "-100px" });
+  const { dictionary } = useLocale();
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -38,14 +40,14 @@ export function ProcessSection() {
               transition={{ duration: 0.6 }}
               className="font-mono text-sm text-accent tracking-[0.2em] uppercase mb-4"
             >
-              How We Work
+              {dictionary.process.label}
             </motion.p>
 
             <TextReveal
               as="h2"
               className="font-heading text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl"
             >
-              Our Process
+              {dictionary.process.heading}
             </TextReveal>
           </div>
         </div>

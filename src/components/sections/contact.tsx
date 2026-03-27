@@ -5,12 +5,14 @@ import { useRef, useState, type FormEvent } from "react";
 import { SectionWrapper } from "@/components/ui/section-wrapper";
 import { TextReveal } from "@/components/effects/text-reveal";
 import { MagneticButton } from "@/components/effects/magnetic-button";
+import { useLocale } from "@/components/providers/locale-provider";
 import { siteConfig } from "@/config/site";
 
 export function ContactSection() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const [submitted, setSubmitted] = useState(false);
+  const { dictionary } = useLocale();
 
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -28,14 +30,14 @@ export function ContactSection() {
             transition={{ duration: 0.6 }}
             className="font-mono text-sm text-accent tracking-[0.2em] uppercase mb-4"
           >
-            Get in Touch
+            {dictionary.contact.label}
           </motion.p>
 
           <TextReveal
             as="h2"
             className="font-heading text-4xl font-bold tracking-tight sm:text-5xl lg:text-7xl justify-center mb-6"
           >
-            Start a project with us
+            {dictionary.contact.heading}
           </TextReveal>
 
           <motion.p
@@ -44,8 +46,7 @@ export function ContactSection() {
             transition={{ duration: 0.6, delay: 0.4 }}
             className="text-muted text-lg max-w-xl mx-auto"
           >
-            Ready to unlock the power of your data? Tell us about your
-            project and we&apos;ll get back to you within 24 hours.
+            {dictionary.contact.description}
           </motion.p>
         </div>
 
@@ -82,10 +83,10 @@ export function ContactSection() {
                 </svg>
               </motion.div>
               <h3 className="font-heading text-2xl font-semibold mb-2">
-                Message Sent
+                {dictionary.contact.success.title}
               </h3>
               <p className="text-muted">
-                We&apos;ll get back to you within 24 hours.
+                {dictionary.contact.success.message}
               </p>
             </motion.div>
           ) : (
@@ -102,7 +103,7 @@ export function ContactSection() {
                     htmlFor="name"
                     className="block text-xs text-muted mb-2 font-mono tracking-wider uppercase group-focus-within:text-accent transition-colors"
                   >
-                    Name
+                    {dictionary.contact.form.nameLabel}
                   </label>
                   <input
                     type="text"
@@ -110,7 +111,7 @@ export function ContactSection() {
                     name="name"
                     required
                     className="w-full bg-transparent border-b-2 border-border px-0 py-3 text-foreground placeholder:text-muted/30 focus:border-primary focus:outline-none transition-colors text-lg"
-                    placeholder="Your name"
+                    placeholder={dictionary.contact.form.namePlaceholder}
                   />
                 </div>
                 <div className="group">
@@ -118,7 +119,7 @@ export function ContactSection() {
                     htmlFor="email"
                     className="block text-xs text-muted mb-2 font-mono tracking-wider uppercase group-focus-within:text-accent transition-colors"
                   >
-                    Email
+                    {dictionary.contact.form.emailLabel}
                   </label>
                   <input
                     type="email"
@@ -126,7 +127,7 @@ export function ContactSection() {
                     name="email"
                     required
                     className="w-full bg-transparent border-b-2 border-border px-0 py-3 text-foreground placeholder:text-muted/30 focus:border-primary focus:outline-none transition-colors text-lg"
-                    placeholder="you@company.com"
+                    placeholder={dictionary.contact.form.emailPlaceholder}
                   />
                 </div>
               </div>
@@ -135,7 +136,7 @@ export function ContactSection() {
                   htmlFor="message"
                   className="block text-xs text-muted mb-2 font-mono tracking-wider uppercase group-focus-within:text-accent transition-colors"
                 >
-                  Project Details
+                  {dictionary.contact.form.messageLabel}
                 </label>
                 <textarea
                   id="message"
@@ -143,7 +144,7 @@ export function ContactSection() {
                   rows={4}
                   required
                   className="w-full bg-transparent border-b-2 border-border px-0 py-3 text-foreground placeholder:text-muted/30 focus:border-primary focus:outline-none transition-colors resize-none text-lg"
-                  placeholder="Tell us about your project..."
+                  placeholder={dictionary.contact.form.messagePlaceholder}
                 />
               </div>
 
@@ -153,7 +154,7 @@ export function ContactSection() {
                   className="rounded-full bg-primary px-12 py-4 text-sm font-medium text-white hover:bg-primary-light transition-colors duration-300"
                   strength={0.2}
                 >
-                  Send Message
+                  {dictionary.contact.form.submitButton}
                 </MagneticButton>
               </div>
             </motion.form>

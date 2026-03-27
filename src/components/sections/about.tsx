@@ -7,6 +7,7 @@ import { TextReveal } from "@/components/effects/text-reveal";
 import { RingChart } from "@/components/effects/ring-chart";
 import { LineChart } from "@/components/effects/line-chart";
 import { AnimatedCounter } from "@/components/ui/animated-counter";
+import { useLocale } from "@/components/providers/locale-provider";
 import { stats } from "@/config/site";
 
 const capabilities = [
@@ -21,6 +22,7 @@ const growthData = [12, 28, 35, 42, 58, 72, 85, 96, 110, 128, 145, 168];
 export function AboutSection() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const { dictionary } = useLocale();
 
   return (
     <SectionWrapper id="about">
@@ -32,14 +34,14 @@ export function AboutSection() {
           transition={{ duration: 0.6 }}
           className="font-mono text-sm text-accent tracking-[0.2em] uppercase mb-4"
         >
-          About Us
+          {dictionary.about.label}
         </motion.p>
 
         <TextReveal
           as="h2"
           className="font-heading text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl mb-6"
         >
-          We speak the language of data
+          {dictionary.about.heading}
         </TextReveal>
 
         <motion.p
@@ -48,10 +50,7 @@ export function AboutSection() {
           transition={{ duration: 0.8, delay: 0.4 }}
           className="text-muted text-lg leading-relaxed max-w-3xl mb-20"
         >
-          Mentarix Data Studio is a team of data engineers, AI researchers,
-          and strategists who believe that every organization sits on a
-          goldmine of untapped data. We build the infrastructure, models, and
-          dashboards that turn raw information into competitive advantage.
+          {dictionary.about.description}
         </motion.p>
 
         {/* Stats row with animated counters */}
@@ -82,7 +81,7 @@ export function AboutSection() {
             className="rounded-2xl border border-border bg-surface/30 p-8"
           >
             <p className="font-mono text-xs text-accent tracking-wider uppercase mb-8">
-              Core Capabilities
+              {dictionary.about.coreCapabilities}
             </p>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
               {capabilities.map((cap) => (
@@ -104,7 +103,7 @@ export function AboutSection() {
             className="rounded-2xl border border-border bg-surface/30 p-8"
           >
             <p className="font-mono text-xs text-accent tracking-wider uppercase mb-8">
-              Project Growth (Monthly)
+              {dictionary.about.monthlyGrowth}
             </p>
             <LineChart
               data={growthData}
@@ -113,9 +112,9 @@ export function AboutSection() {
               label="deliveries"
             />
             <div className="flex justify-between mt-4 text-xs text-muted/50 font-mono">
-              <span>Jan</span>
-              <span>Jun</span>
-              <span>Dec</span>
+              <span>{dictionary.about.months[0]}</span>
+              <span>{dictionary.about.months[5]}</span>
+              <span>{dictionary.about.months[11]}</span>
             </div>
           </motion.div>
         </div>

@@ -1,7 +1,11 @@
+"use client";
+
 import { siteConfig } from "@/config/site";
+import { useLocale } from "@/components/providers/locale-provider";
 
 export function Footer() {
   const year = new Date().getFullYear();
+  const { dictionary } = useLocale();
 
   return (
     <footer className="border-t border-border bg-background">
@@ -9,10 +13,10 @@ export function Footer() {
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           <div>
             <span className="font-heading text-lg font-bold gradient-text">
-              Mentarix
+              {dictionary.common.brand}
             </span>
             <span className="ml-1 text-muted text-xs tracking-widest uppercase">
-              Data Studio
+              {dictionary.common.tagline}
             </span>
           </div>
 
@@ -26,7 +30,7 @@ export function Footer() {
           </div>
 
           <p className="text-xs text-muted/60">
-            &copy; {year} {siteConfig.name}. All rights reserved.
+            &copy; {year} {dictionary.common.brand}. {dictionary.footer.rights}
           </p>
         </div>
       </div>

@@ -1,0 +1,155 @@
+{
+  "nav": {
+    "about": "關於我們",
+    "services": "服務",
+    "projects": "專案",
+    "process": "流程",
+    "contact": "聯絡",
+    "startProject": "開始專案",
+    "toggleMenu": "切換導覽選單"
+  },
+  "hero": {
+    "tagline": "將數據轉化為決策",
+    "description": "我們將複雜的數據集轉化為可行的見解，幫助您的組織自信地做出數據驅動的決策。",
+    "ctaServices": "探索我們的服務",
+    "ctaContact": "聯絡我們",
+    "scrollIndicator": "向下滾動探索"
+  },
+  "about": {
+    "label": "關於我們",
+    "heading": "我們會說數據的語言",
+    "description": "擁有超過十年的數據工程、機器學習和商業智能方面的綜合專業知識，我們幫助組織發揮數據的真正潛力。",
+    "capabilities": {
+      "dataEngineering": "數據工程",
+      "aiMl": "AI / 機器學習",
+      "visualization": "數據視覺化",
+      "strategy": "策略規劃"
+    },
+    "stats": {
+      "projectsDelivered": "完成專案",
+      "dataProcessed": "已處理數據",
+      "clientsServed": "服務客戶",
+      "yearsExperience": "年經驗"
+    },
+    "coreCapabilities": "核心能力",
+    "monthlyGrowth": "月度增長",
+    "months": ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"]
+  },
+  "services": {
+    "label": "我們的服務",
+    "heading": "專業服務",
+    "services": [
+      {
+        "title": "數據工程",
+        "description": "構建可擴展的數據管道和基礎設施，能夠以零停機時間處理數十億個數據點。"
+      },
+      {
+        "title": "機器學習",
+        "description": "部署從您的數據中學習並隨時間改進的自定義機器學習模型，自動化複雜決策。"
+      },
+      {
+        "title": "數據分析",
+        "description": "將原始數據轉化為視覺故事，揭示隱藏的模式並驅動戰略決策。"
+      },
+      {
+        "title": "人工智能集成",
+        "description": "無縫將人工智能功能集成到您現有的系統中，從大語言模型到計算機視覺。"
+      },
+      {
+        "title": "數據策略",
+        "description": "定義與您的業務目標相符的清晰數據路線圖，從數據收集到洞察生成。"
+      },
+      {
+        "title": "諮詢服務",
+        "description": "關於數據架構、技術選擇和組織轉型的專家指導。"
+      }
+    ]
+  },
+  "projects": {
+    "label": "精選作品",
+    "heading": "我們的專案",
+    "viewCaseStudy": "查看案例研究",
+    "keyMetrics": "關鍵指標",
+    "projects": [
+      {
+        "title": "實時分析平台",
+        "category": "數據工程",
+        "description": "為主要電商平台構建分佈式流媒體平台，每秒處理 100,000+ 個事件。"
+      },
+      {
+        "title": "預測性維護系統",
+        "category": "機器學習",
+        "description": "部署機器學習模型，通過預測故障檢測將設備停機時間減少 40%。"
+      },
+      {
+        "title": "客戶洞察儀表板",
+        "category": "數據分析",
+        "description": "創建實時儀表板，分析 5 億+ 個客戶互動，實現個性化營銷。"
+      },
+      {
+        "title": "供應鏈最優化",
+        "category": "人工智能策略",
+        "description": "實施人工智能驅動的物流最優化，將運營成本降低 25%。"
+      }
+    ]
+  },
+  "process": {
+    "label": "我們的工作方式",
+    "heading": "工作流程",
+    "steps": [
+      {
+        "title": "發現階段",
+        "description": "我們深入了解您的數據環境、挑戰和目標，以理解成功的含義。"
+      },
+      {
+        "title": "架構設計",
+        "description": "根據您的技術堆棧和業務需求設計可擴展、堅固的解決方案。"
+      },
+      {
+        "title": "實施部署",
+        "description": "構建、測試和部署解決方案，零停機，維持最高質量標準。"
+      },
+      {
+        "title": "性能優化",
+        "description": "監控性能，收集見解，根據實際使用情況持續改進系統。"
+      },
+      {
+        "title": "持續支持",
+        "description": "提供持續維護、更新和戰略指導，滿足不斷演變的數據需求。"
+      }
+    ]
+  },
+  "contact": {
+    "label": "聯絡我們",
+    "heading": "開始您的專案",
+    "description": "無論您是想優化數據基礎設施還是解鎖新的洞察，我們已準備好協助。",
+    "form": {
+      "nameLabel": "姓名",
+      "namePlaceholder": "您的姓名",
+      "emailLabel": "電郵",
+      "emailPlaceholder": "you@company.com",
+      "messageLabel": "專案詳情",
+      "messagePlaceholder": "告訴我們關於您的專案...",
+      "submitButton": "傳送訊息"
+    },
+    "success": {
+      "title": "訊息已發送",
+      "message": "感謝您的聯繫！我們將在 24 小時內回覆。"
+    },
+    "contactInfo": "或直接聯繫"
+  },
+  "footer": {
+    "rights": "版權所有。"
+  },
+  "common": {
+    "brand": "Mentarix",
+    "tagline": "Data Studio",
+    "briefTagline": "大數據 + AI",
+    "email": "contact@mentarix.studio"
+  },
+  "metadata": {
+    "title": "Mentarix Data Studio - 數據工程及AI解決方案",
+    "description": "將您的數據轉化為競爭優勢。我們為企業提供端到端的數據工程、機器學習和人工智能解決方案。",
+    "keywords": "數據工程, 機器學習, 人工智能, 數據分析, 數據策略, 雲基礎設施"
+  }
+}

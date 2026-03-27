@@ -5,7 +5,7 @@ import dynamic from "next/dynamic";
 import { motion } from "framer-motion";
 import { BrandLogo } from "@/components/effects/brand-logo";
 import { MagneticButton } from "@/components/effects/magnetic-button";
-import { siteConfig } from "@/config/site";
+import { useLocale } from "@/components/providers/locale-provider";
 
 const HeroScene = dynamic(
   () =>
@@ -17,6 +17,7 @@ const HeroScene = dynamic(
 
 export function HeroSection() {
   const [sceneVisible, setSceneVisible] = useState(false);
+  const { dictionary } = useLocale();
 
   useEffect(() => {
     // Show 3D scene after brand convergence
@@ -53,7 +54,7 @@ export function HeroSection() {
           className="text-center mt-8 sm:mt-12"
         >
           <p className="text-lg sm:text-xl text-muted leading-relaxed max-w-2xl mx-auto">
-            {siteConfig.subtitle}
+            {dictionary.hero.description}
           </p>
         </motion.div>
 
@@ -65,7 +66,7 @@ export function HeroSection() {
             transition={{ duration: 1, delay: 6.2, ease: [0.16, 1, 0.3, 1] }}
             className="font-heading text-xl sm:text-2xl lg:text-3xl font-medium gradient-text"
           >
-            Turning Data into Decisions
+            {dictionary.hero.tagline}
           </motion.p>
         </div>
 
@@ -80,13 +81,13 @@ export function HeroSection() {
             href="#services"
             className="inline-flex items-center gap-2 rounded-full bg-primary px-8 py-3.5 text-sm font-medium text-white hover:bg-primary-light transition-colors duration-300"
           >
-            Explore Our Services
+            {dictionary.hero.ctaServices}
           </MagneticButton>
           <MagneticButton
             href="#contact"
             className="inline-flex items-center gap-2 rounded-full border border-border px-8 py-3.5 text-sm font-medium text-muted hover:text-foreground hover:border-muted transition-colors duration-300"
           >
-            Get in Touch
+            {dictionary.hero.ctaContact}
           </MagneticButton>
         </motion.div>
       </div>

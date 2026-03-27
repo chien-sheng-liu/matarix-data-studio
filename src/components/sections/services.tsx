@@ -4,6 +4,7 @@ import { motion, useInView, AnimatePresence } from "framer-motion";
 import { useRef, useState } from "react";
 import { SectionWrapper } from "@/components/ui/section-wrapper";
 import { TextReveal } from "@/components/effects/text-reveal";
+import { useLocale } from "@/components/providers/locale-provider";
 import { services } from "@/config/site";
 
 const iconPaths: Record<string, string> = {
@@ -34,6 +35,7 @@ export function ServicesSection() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
+  const { dictionary } = useLocale();
 
   return (
     <SectionWrapper id="services" className="bg-surface/30">
@@ -44,14 +46,14 @@ export function ServicesSection() {
           transition={{ duration: 0.6 }}
           className="font-mono text-sm text-accent tracking-[0.2em] uppercase mb-4 text-center"
         >
-          What We Do
+          {dictionary.services.label}
         </motion.p>
 
         <TextReveal
           as="h2"
           className="font-heading text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl mb-16 justify-center"
         >
-          Our Services
+          {dictionary.services.heading}
         </TextReveal>
 
         {/* Interactive accordion-style list */}

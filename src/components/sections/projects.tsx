@@ -4,6 +4,7 @@ import { motion, useScroll, useTransform, useInView } from "framer-motion";
 import { useRef } from "react";
 import { TextReveal } from "@/components/effects/text-reveal";
 import { BarChart } from "@/components/effects/bar-chart";
+import { useLocale } from "@/components/providers/locale-provider";
 import { projects } from "@/config/site";
 
 const projectCharts = [
@@ -43,6 +44,7 @@ function ProjectCard({
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const isEven = index % 2 === 0;
+  const { dictionary } = useLocale();
 
   return (
     <motion.div
@@ -98,7 +100,7 @@ function ProjectCard({
             className="flex items-center gap-2 text-sm font-medium"
             style={{ color: project.color }}
           >
-            <span>View Case Study</span>
+            <span>{dictionary.projects.viewCaseStudy}</span>
             <svg
               className="w-4 h-4"
               fill="none"
@@ -126,7 +128,7 @@ function ProjectCard({
         >
           <div className="flex items-center justify-between mb-6">
             <span className="font-mono text-xs text-muted tracking-wider uppercase">
-              Key Metrics
+              {dictionary.projects.keyMetrics}
             </span>
             <div
               className="w-2 h-2 rounded-full animate-pulse"
@@ -144,6 +146,7 @@ export function ProjectsSection() {
   const containerRef = useRef(null);
   const headerRef = useRef(null);
   const headerInView = useInView(headerRef, { once: true, margin: "-100px" });
+  const { dictionary } = useLocale();
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -171,14 +174,14 @@ export function ProjectsSection() {
             transition={{ duration: 0.6 }}
             className="font-mono text-sm text-accent tracking-[0.2em] uppercase mb-4"
           >
-            Selected Work
+            {dictionary.projects.label}
           </motion.p>
 
           <TextReveal
             as="h2"
             className="font-heading text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl justify-center"
           >
-            Our Projects
+            {dictionary.projects.heading}
           </TextReveal>
         </div>
 

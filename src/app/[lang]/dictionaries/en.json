@@ -1,0 +1,155 @@
+{
+  "nav": {
+    "about": "About",
+    "services": "Services",
+    "projects": "Projects",
+    "process": "Process",
+    "contact": "Contact",
+    "startProject": "Start a Project",
+    "toggleMenu": "Toggle navigation menu"
+  },
+  "hero": {
+    "tagline": "Turning Data into Decisions",
+    "description": "We transform complex datasets into actionable insights, empowering your organization to make data-driven decisions with confidence.",
+    "ctaServices": "Explore Our Services",
+    "ctaContact": "Get in Touch",
+    "scrollIndicator": "Scroll to explore"
+  },
+  "about": {
+    "label": "About Us",
+    "heading": "We speak the language of data",
+    "description": "With over a decade of combined expertise in data engineering, machine learning, and business intelligence, we help organizations unlock the true potential of their data.",
+    "capabilities": {
+      "dataEngineering": "Data Engineering",
+      "aiMl": "AI / ML",
+      "visualization": "Visualization",
+      "strategy": "Strategy"
+    },
+    "stats": {
+      "projectsDelivered": "Projects Delivered",
+      "dataProcessed": "Data Processed",
+      "clientsServed": "Clients Served",
+      "yearsExperience": "Years Experience"
+    },
+    "coreCapabilities": "Core Capabilities",
+    "monthlyGrowth": "Monthly Growth",
+    "months": ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+  },
+  "services": {
+    "label": "What We Do",
+    "heading": "Our Services",
+    "services": [
+      {
+        "title": "Data Engineering",
+        "description": "Build scalable data pipelines and infrastructure that handle billions of data points with zero downtime."
+      },
+      {
+        "title": "Machine Learning",
+        "description": "Deploy custom ML models that learn from your data and improve over time, automating complex decisions."
+      },
+      {
+        "title": "Data Analytics",
+        "description": "Transform raw data into visual stories that reveal hidden patterns and drive strategic decisions."
+      },
+      {
+        "title": "AI Integration",
+        "description": "Seamlessly integrate AI capabilities into your existing systems, from LLMs to computer vision."
+      },
+      {
+        "title": "Data Strategy",
+        "description": "Define a clear data roadmap aligned with your business goals, from collection to insight."
+      },
+      {
+        "title": "Consulting",
+        "description": "Expert guidance on data architecture, technology selection, and organizational transformation."
+      }
+    ]
+  },
+  "projects": {
+    "label": "Selected Work",
+    "heading": "Our Projects",
+    "viewCaseStudy": "View Case Study",
+    "keyMetrics": "Key Metrics",
+    "projects": [
+      {
+        "title": "Real-time Analytics Platform",
+        "category": "Data Engineering",
+        "description": "Built a distributed streaming platform processing 100K+ events per second for a major e-commerce platform."
+      },
+      {
+        "title": "Predictive Maintenance System",
+        "category": "Machine Learning",
+        "description": "Deployed ML model reducing equipment downtime by 40% through predictive failure detection."
+      },
+      {
+        "title": "Customer Insights Dashboard",
+        "category": "Data Analytics",
+        "description": "Created real-time dashboard analyzing 500M+ customer interactions, enabling personalized marketing."
+      },
+      {
+        "title": "Supply Chain Optimization",
+        "category": "AI Strategy",
+        "description": "Implemented AI-powered logistics optimization reducing operational costs by 25%."
+      }
+    ]
+  },
+  "process": {
+    "label": "How We Work",
+    "heading": "Our Process",
+    "steps": [
+      {
+        "title": "Discovery",
+        "description": "We dive deep into your data landscape, challenges, and goals to understand what success looks like."
+      },
+      {
+        "title": "Architecture",
+        "description": "Design scalable, robust solutions tailored to your technical stack and business requirements."
+      },
+      {
+        "title": "Implementation",
+        "description": "Build, test, and deploy solutions with zero downtime, maintaining the highest quality standards."
+      },
+      {
+        "title": "Optimization",
+        "description": "Monitor performance, gather insights, and continuously improve systems based on real-world usage."
+      },
+      {
+        "title": "Support",
+        "description": "Provide ongoing maintenance, updates, and strategic guidance as your data needs evolve."
+      }
+    ]
+  },
+  "contact": {
+    "label": "Get in Touch",
+    "heading": "Start a project with us",
+    "description": "Whether you're looking to optimize your data infrastructure or unlock new insights, we're ready to help.",
+    "form": {
+      "nameLabel": "Name",
+      "namePlaceholder": "Your name",
+      "emailLabel": "Email",
+      "emailPlaceholder": "you@company.com",
+      "messageLabel": "Project Details",
+      "messagePlaceholder": "Tell us about your project...",
+      "submitButton": "Send Message"
+    },
+    "success": {
+      "title": "Message Sent",
+      "message": "Thanks for reaching out! We'll get back to you within 24 hours."
+    },
+    "contactInfo": "or reach out directly at"
+  },
+  "footer": {
+    "rights": "All rights reserved."
+  },
+  "common": {
+    "brand": "Mentarix",
+    "tagline": "Data Studio",
+    "briefTagline": "Big Data + AI",
+    "email": "contact@mentarix.studio"
+  },
+  "metadata": {
+    "title": "Mentarix Data Studio - Data Engineering & AI Solutions",
+    "description": "Transform your data into competitive advantage. We provide end-to-end data engineering, ML, and AI solutions for enterprises.",
+    "keywords": "data engineering, machine learning, AI, analytics, data strategy, cloud infrastructure"
+  }
+}
