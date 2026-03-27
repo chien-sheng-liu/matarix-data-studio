@@ -1,0 +1,28 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:www.epic.net)",
+      "Bash(npx:*)",
+      "Bash(yes \"\")",
+      "Bash(npm install:*)",
+      "Bash(npm run:*)",
+      "Bash(lsof -ti:3000)",
+      "Bash(xargs kill:*)",
+      "Bash(lsof -ti:3008)",
+      "WebFetch(domain:henryheffernan.com)",
+      "Bash(git rm:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "Bash(git add:*)",
+      "Bash(git clone:*)",
+      "Bash(cp:*)",
+      "Bash(git checkout:*)",
+      "Bash(git branch:*)",
+      "Bash(git status:*)",
+      "Bash(git diff:*)",
+      "Bash(git stash:*)",
+      "Bash(git log:*)",
+      "Bash(gh:*)"
+    ]
+  }
+}
