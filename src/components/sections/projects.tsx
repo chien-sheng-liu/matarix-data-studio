@@ -4,6 +4,7 @@ import { motion, useScroll, useTransform, useInView, animate } from "framer-moti
 import { useRef, useState, useEffect } from "react";
 import { TextReveal } from "@/components/effects/text-reveal";
 import { useLocale } from "@/components/providers/locale-provider";
+import { ProjectDrawer } from "@/components/ui/project-drawer";
 import { projects } from "@/config/site";
 
 // ─── Visualization 1: Stock Chart ────────────────────────────────────────────
@@ -302,7 +303,7 @@ function ProjectViz({ index, color, isInView }: { index: number; color: string; 
 }
 
 // ─── Project Card ─────────────────────────────────────────────────────────────
-function ProjectCard({ project, index }: { project: (typeof projects)[number]; index: number }) {
+function ProjectCard({ project, index, onOpen }: { project: (typeof projects)[number]; index: number; onOpen: () => void }) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const isEven = index % 2 === 0;
@@ -355,7 +356,7 @@ function ProjectCard({ project, index }: { project: (typeof projects)[number]; i
             initial={{ opacity: 0 }}
             animate={isInView ? { opacity: 1 } : {}}
             transition={{ duration: 0.6, delay: 0.5 }}
-            className="flex flex-wrap gap-2"
+            className="flex flex-wrap gap-2 mb-6"
           >
             {"technologies" in project &&
               (project.technologies as readonly string[]).map((tech) => (
@@ -365,6 +366,21 @@ function ProjectCard({ project, index }: { project: (typeof projects)[number]; i
                 </span>
               ))}
           </motion.div>
+
+          <motion.button
+            initial={{ opacity: 0 }}
+            animate={isInView ? { opacity: 1 } : {}}
+            transition={{ duration: 0.6, delay: 0.6 }}
+            onClick={onOpen}
+            className="group inline-flex items-center gap-2 text-sm font-medium transition-colors"
+            style={{ color: project.color }}
+          >
+            {dictionary.projects.viewDetails as string}
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"
+              className="transition-transform group-hover:translate-x-1">
+              <path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </motion.button>
         </div>
 
         {/* Visualization side */}
@@ -420,9 +436,10 @@ export function ProjectsSection() {
   const { dictionary } = useLocale();
   const { scrollYProgress } = useScroll({ target: containerRef, offset: ["start end", "end start"] });
   const bgY = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
+  const [selected, setSelected] = useState<{ index: number; side: "left" | "right" } | null>(null);
 
   return (
-    <section id="projects" ref={containerRef} className="relative px-6 py-24 lg:px-8 lg:py-32 overflow-hidden">
+    <section id="projects" ref={containerRef} className="relative px-6 py-14 lg:px-8 lg:py-20 overflow-hidden">
       <motion.div style={{ y: bgY }}
         className="absolute top-0 right-0 w-96 h-96 rounded-full bg-primary/5 blur-[128px] pointer-events-none" />
 
@@ -440,11 +457,17 @@ export function ProjectsSection() {
         </div>
 
         <div className="space-y-28">
-          {projects.map((project, i) => (
-            <ProjectCard key={project.title} project={project} index={i} />
-          ))}
+          {projects.map((project, i) => {
+            // Even: text left → drawer right. Odd: text right → drawer left.
+            const drawerSide = i % 2 === 0 ? "right" : "left";
+            return (
+              <ProjectCard key={project.title} project={project} index={i} onOpen={() => setSelected({ index: i, side: drawerSide })} />
+            );
+          })}
         </div>
       </div>
+
+      <ProjectDrawer index={selected?.index ?? null} side={selected?.side ?? "right"} onClose={() => setSelected(null)} />
     </section>
   );
 }

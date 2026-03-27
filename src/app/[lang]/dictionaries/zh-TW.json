@@ -97,33 +97,77 @@
   "projects": {
     "label": "精選作品",
     "heading": "專案案例",
-    "viewCaseStudy": "查看案例研究",
+    "viewDetails": "查看詳情",
     "keyMetrics": "關鍵指標",
+    "role": "擔任角色",
+    "highlights": "專案亮點",
+    "outcome": "專案成果",
+    "close": "關閉",
     "projects": [
       {
         "title": "股票多代理人財務分析平台",
         "category": "LLM",
-        "description": "結合 LLM Gateway 與 Playwright 瀏覽器自動化的金融分析平台，透過新聞、財務、交易員與數據代理人的多代理人協作，搭載安全防護層與完整的工件可追溯性。"
+        "description": "結合 LLM Gateway 與 Playwright 瀏覽器自動化的金融分析平台，透過新聞、財務、交易員與數據代理人的多代理人協作，搭載安全防護層與完整的工件可追溯性。",
+        "role": "AI 工程師主導",
+        "highlights": [
+          "以 LLM Gateway 為核心，協調新聞、財務、交易、資料四個專業代理人，實現模組化多代理人架構",
+          "實作五層安全防護機制：提示注入防禦、幻覺偵測、結構化輸出驗證等",
+          "整合 Playwright 即時爬取財務新聞、財報資料與即時市場行情",
+          "設計完整的決策軌跡追蹤機制，每筆 AI 輸出、工具呼叫與中間結果均可完整稽核"
+        ],
+        "outcome": "財務研究週轉時間縮短約 70%，同時對所有 AI 生成的洞察與交易訊號保有完整的可稽核性。"
       },
       {
         "title": "海事高風險與異常行為預測",
         "category": "深度學習",
-        "description": "整合國家氣象數據、船舶靜態資料與即時 AIS 串流至 ClickHouse，結合深度學習預測擱淺及異常行為，協助預防海事事故。"
+        "description": "整合國家氣象數據、船舶靜態資料與即時 AIS 串流至 ClickHouse，結合深度學習預測擱淺及異常行為，協助預防海事事故。",
+        "role": "資料工程師 & 機器學習工程師",
+        "highlights": [
+          "整合 15+ 異質資料來源：國家氣象 API、即時 AIS 串流、船舶靜態登記及港口時刻表",
+          "以 ClickHouse 欄式儲存建構即時串流 Pipeline，處理並查詢逾 20TB 的船舶移動歷史資料",
+          "訓練深度學習模型，以高精準度偵測船舶擱淺風險與異常航行行為",
+          "依主管機關資料主權要求，全系統採地端部署（On-premises）"
+        ],
+        "outcome": "建立高風險船舶行為預警系統，積極支援政府海事安全作業，有效縮短事故應變時間。"
       },
       {
         "title": "COVID-19 衝擊下的時間序列預測",
         "category": "深度學習",
-        "description": "比較 SARIMA、Holt-Winters 與 Prophet 在 COVID-19 衝擊下的表現，設計三組實驗量化外部衝擊對時間序列預測精度的影響。"
+        "description": "比較 SARIMA、Holt-Winters 與 Prophet 在 COVID-19 衝擊下的表現，設計三組實驗量化外部衝擊對時間序列預測精度的影響。",
+        "role": "資料科學家（學術研究 · 曼海姆大學）",
+        "highlights": [
+          "設計三組實驗：COVID 前基準線、干擾期間、疫後復甦，進行嚴謹的跨模型比較",
+          "在外部衝擊情境下，對多個真實世界資料集評估 SARIMA、Holt-Winters、Prophet 三種模型",
+          "以 RMSE 與 MAPE 量化各模型在干擾期間的精度衰退幅度，分離結構性斷點的影響",
+          "研究於德國曼海姆大學（University of Mannheim）研究所期間進行"
+        ],
+        "outcome": "研究結果顯示 Prophet 在干擾期間具最高韌性，而 SARIMA 在疫後復甦階段展現出最佳預測精度。"
       },
       {
         "title": "角子機引擎與機率優化器",
         "category": "演算法",
-        "description": "3×3 角子機引擎，結合蒙地卡羅模擬與啟發式搜尋，在 RTP 95% 與勝率 ≥55% 的約束下自動優化捲軸配置，採 FastAPI 後端與 React 前端全端實作。"
+        "description": "3×3 角子機引擎，結合蒙地卡羅模擬與啟發式搜尋，在 RTP 95% 與勝率 ≥55% 的約束下自動優化捲軸配置，採 FastAPI 後端與 React 前端全端實作。",
+        "role": "全端工程師 & 演算法設計師",
+        "highlights": [
+          "開發完整 3×3 角子機遊戲引擎，支援可配置捲軸符號、賠率表及 5 種勝利組合",
+          "以蒙地卡羅模擬（10 萬次迭代）結合啟發式搜尋，自動優化捲軸配置",
+          "同時滿足雙重限制條件：玩家回報率（RTP）≥ 95% 且勝率 ≥ 55%",
+          "建構 FastAPI 後端 + React 前端全端介面，即時視覺化 RTP 最佳化過程與模擬控制"
+        ],
+        "outcome": "自動化捲軸優化流程，將原本需數天手動計算的配置工作壓縮至數分鐘的自動化搜尋。"
       },
       {
         "title": "AutoLLM — 無程式碼 RAG 聊天機器人平台",
         "category": "LLM",
-        "description": "生產級 RAG 平台，支援文件上傳、向量檢索、多 LLM 切換，具備 Redis + PostgreSQL 雙層儲存架構與 Docker 微服務部署。"
+        "description": "生產級 RAG 平台，支援文件上傳、向量檢索、多 LLM 切換，具備 Redis + PostgreSQL 雙層儲存架構與 Docker 微服務部署。",
+        "role": "全端 AI 工程師",
+        "highlights": [
+          "設計無程式碼 RAG 平台，讓非技術人員只需上傳文件即可建立專屬領域聊天機器人",
+          "建構雙層儲存架構：pgvector 負責語意向量檢索，Redis 處理對話快取與歷史記錄",
+          "透過統一 API 抽象層，實作 OpenAI、Gemini、Claude 三大 LLM 供應商的動態切換",
+          "以 Docker Compose 容器化全部 5 個微服務，一行指令完成部署與水平擴展"
+        ],
+        "outcome": "讓非技術團隊將聊天機器人上線時間從數週縮短至數小時，生產環境提供 15+ API 端點與多租戶文件隔離。"
       }
     ]
   },
