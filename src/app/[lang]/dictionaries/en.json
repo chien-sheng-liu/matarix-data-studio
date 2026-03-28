@@ -4,6 +4,7 @@
     "services": "Services",
     "projects": "Projects",
     "process": "Process",
+    "team": "Team",
     "contact": "Contact",
     "startProject": "Start a Project",
     "toggleMenu": "Toggle navigation menu"
@@ -170,6 +171,21 @@
         "outcome": "Reduced chatbot deployment time from weeks to hours for non-technical teams, with 15+ production-ready API endpoints and multi-tenant document isolation."
       }
     ]
+  },
+  "team": {
+    "label": "Core Team",
+    "heading": "Meet the Team",
+    "roles": [
+      {
+        "role": "Founder & AI Strategist",
+        "bio": "Trilingual data and AI leader with 8-person team across Taiwan, Germany, and Hong Kong. 15+ analytics projects, NT$80M+ delivered value."
+      },
+      {
+        "role": "Senior Data Engineer",
+        "bio": "5+ years building event-driven architectures and TB-level data platforms. 10+ GenAI deployments, NT$50M+ project revenue."
+      }
+    ],
+    "viewPortfolio": "View Portfolio"
   },
   "process": {
     "label": "How We Work",

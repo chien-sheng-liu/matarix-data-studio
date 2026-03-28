@@ -6,6 +6,7 @@ import { AboutSection } from "@/components/sections/about";
 import { ServicesSection } from "@/components/sections/services";
 import { ProjectsSection } from "@/components/sections/projects";
 import { ProcessSection } from "@/components/sections/process";
+import { TeamSection } from "@/components/sections/team";
 import { ContactSection } from "@/components/sections/contact";
 import { hasLocale } from "@/app/[lang]/dictionaries";
 import { notFound } from "next/navigation";
@@ -33,6 +34,7 @@ export default async function Home({ params }: PageProps) {
         <ServicesSection />
         <ProjectsSection />
         <ProcessSection />
+        <TeamSection />
         <ContactSection />
       </main>
       <Footer />
