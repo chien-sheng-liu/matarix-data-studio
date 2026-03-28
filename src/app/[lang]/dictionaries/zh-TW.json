@@ -199,22 +199,26 @@
   },
   "contact": {
     "label": "聯絡我們",
-    "heading": "開始您的專案",
-    "description": "無論您是想優化數據基礎設施還是解鎖新的洞察，我們已準備好協助。",
-    "form": {
-      "nameLabel": "姓名",
-      "namePlaceholder": "您的姓名",
-      "emailLabel": "電郵",
-      "emailPlaceholder": "you@company.com",
-      "messageLabel": "專案詳情",
-      "messagePlaceholder": "告訴我們關於您的專案...",
-      "submitButton": "傳送訊息"
-    },
-    "success": {
-      "title": "訊息已發送",
-      "message": "感謝您的聯繫！我們將在 24 小時內回覆。"
-    },
-    "contactInfo": "或直接聯繫"
+    "heading": "有想法？聊聊吧",
+    "description": "無論是數據工程專案、AI 策略規劃，或只是交流想法——我們很樂意與您聯繫。",
+    "channels": [
+      {
+        "label": "Email",
+        "subtitle": "最快的聯繫方式",
+        "detail": "contact@mentarix.studio"
+      },
+      {
+        "label": "LinkedIn",
+        "subtitle": "專業社群",
+        "detail": "Mentarix Data Studio"
+      },
+      {
+        "label": "預約通話",
+        "subtitle": "30 分鐘 / Google 日曆",
+        "detail": "選擇您方便的時間"
+      }
+    ],
+    "responseTime": "通常在 24 小時內回覆"
   },
   "footer": {
     "rights": "版權所有。"

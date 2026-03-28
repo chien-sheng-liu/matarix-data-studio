@@ -5,7 +5,9 @@ export const siteConfig = {
   tagline: "Turning Data into Decisions",
   subtitle: "大數據分析 · AI 解決方案 · 數據驅動策略",
   url: "https://mentarix.studio",
-  email: "hello@mentarix.studio",
+  email: "contact@mentarix.studio",
+  linkedin: "https://www.linkedin.com/in/chienshengliu/",
+  calendar: "https://calendar.app.google/MANJXP2ZZiaWF5T26",
 };
 
 export const navItems = [

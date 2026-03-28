@@ -198,23 +198,27 @@
     ]
   },
   "contact": {
-    "label": "Get in Touch",
-    "heading": "Start a project with us",
-    "description": "Whether you're looking to optimize your data infrastructure or unlock new insights, we're ready to help.",
-    "form": {
-      "nameLabel": "Name",
-      "namePlaceholder": "Your name",
-      "emailLabel": "Email",
-      "emailPlaceholder": "you@company.com",
-      "messageLabel": "Project Details",
-      "messagePlaceholder": "Tell us about your project...",
-      "submitButton": "Send Message"
-    },
-    "success": {
-      "title": "Message Sent",
-      "message": "Thanks for reaching out! We'll get back to you within 24 hours."
-    },
-    "contactInfo": "or reach out directly at"
+    "label": "Let's Talk",
+    "heading": "Got a project? Let's chat",
+    "description": "Whether it's a data engineering project, AI strategy, or just exchanging ideas — we'd love to hear from you.",
+    "channels": [
+      {
+        "label": "Email",
+        "subtitle": "Fastest way to reach us",
+        "detail": "contact@mentarix.studio"
+      },
+      {
+        "label": "LinkedIn",
+        "subtitle": "Professional network",
+        "detail": "Mentarix Data Studio"
+      },
+      {
+        "label": "Book a Call",
+        "subtitle": "30 min / Google Calendar",
+        "detail": "Pick a time that works for you"
+      }
+    ],
+    "responseTime": "Usually reply within 24 hours"
   },
   "footer": {
     "rights": "All rights reserved."
