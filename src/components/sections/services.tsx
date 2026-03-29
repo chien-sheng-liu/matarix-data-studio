@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, AnimatePresence, useInView } from "framer-motion";
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, useCallback } from "react";
 import { SectionWrapper } from "@/components/ui/section-wrapper";
 import { TextReveal } from "@/components/effects/text-reveal";
 import { useLocale } from "@/components/providers/locale-provider";
@@ -126,11 +126,28 @@ function ServicePreview({
 export function ServicesSection() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const sectionInView = useInView(ref, { margin: "-20%" });
   const { dictionary } = useLocale();
   const [active, setActive] = useState(0);
+  const [paused, setPaused] = useState(false);
 
   const dictServices = dictionary.services.services as Array<{ title: string; description: string }>;
   const activeColor = accentColors[active];
+
+  const handleManualSelect = useCallback((i: number) => {
+    setActive(i);
+    setPaused(true);
+    setTimeout(() => setPaused(false), 6000);
+  }, []);
+
+  // Auto-advance every 3.5s when in view and not paused
+  useEffect(() => {
+    if (!sectionInView || paused) return;
+    const id = setInterval(() => {
+      setActive(prev => (prev + 1) % services.length);
+    }, 3500);
+    return () => clearInterval(id);
+  }, [sectionInView, paused]);
 
   return (
     <SectionWrapper id="services" className="bg-surface/30">
@@ -148,7 +165,11 @@ export function ServicesSection() {
           {dictionary.services.heading}
         </TextReveal>
 
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.2fr] gap-4 lg:gap-6">
+        <div
+          className="grid grid-cols-1 lg:grid-cols-[1fr_1.2fr] gap-4 lg:gap-6"
+          onMouseEnter={() => setPaused(true)}
+          onMouseLeave={() => setPaused(false)}
+        >
           {/* Left: service list */}
           <div className="rounded-2xl border border-white/[0.07] overflow-hidden">
             {services.map((service, i) => {
@@ -161,8 +182,8 @@ export function ServicesSection() {
                   initial={{ opacity: 0, x: -20 }}
                   animate={isInView ? { opacity: 1, x: 0 } : {}}
                   transition={{ duration: 0.5, delay: 0.08 * i, ease: [0.16, 1, 0.3, 1] }}
-                  onMouseEnter={() => setActive(i)}
-                  onClick={() => setActive(i)}
+                  onMouseEnter={() => handleManualSelect(i)}
+                  onClick={() => handleManualSelect(i)}
                   className="w-full flex items-center gap-5 px-6 py-4 text-left transition-colors duration-200 relative"
                   style={{
                     backgroundColor: isActive ? `${color}0C` : "transparent",
