@@ -5,7 +5,9 @@ export const siteConfig = {
   tagline: "Turning Data into Decisions",
   subtitle: "大數據分析 · AI 解決方案 · 數據驅動策略",
   url: "https://mentarix.studio",
-  email: "hello@mentarix.studio",
+  email: "contact@mentarix.studio",
+  linkedin: "https://www.linkedin.com/in/chienshengliu/",
+  calendar: "https://calendar.app.google/MANJXP2ZZiaWF5T26",
 };
 
 export const navItems = [
@@ -13,6 +15,7 @@ export const navItems = [
   { label: "Services", href: "#services" },
   { label: "Projects", href: "#projects" },
   { label: "Process", href: "#process" },
+  { label: "Team", href: "#team" },
   { label: "Contact", href: "#contact" },
 ] as const;
 
@@ -100,6 +103,35 @@ export const projects = [
     color: "#EC4899",
     technologies: ["FastAPI", "Next.js", "PostgreSQL", "pgvector", "Redis", "Docker", "OpenAI"],
     metrics: ["3+ LLM Providers", "15+ API Endpoints", "Docker Deploy"],
+  },
+] as const;
+
+export const teamMembers = [
+  {
+    name: "Morris Liu",
+    nameCn: "劉建聖",
+    role: "Founder & AI Strategist",
+    color: "#6366F1",
+    photo: "https://chien-sheng-liu.github.io/profile.png",
+    expertise: ["AI Strategy", "Data Science", "NLP & LLM", "BI & Analytics"],
+    social: {
+      github: "https://github.com/chien-sheng-liu",
+      linkedin: "https://www.linkedin.com/in/chienshengliu/",
+      email: "liu_chiensheng@outlook.com",
+    },
+  },
+  {
+    name: "Alex Lin",
+    nameCn: "林力宇",
+    role: "Senior Data Engineer",
+    color: "#06B6D4",
+    photo: "https://alexstartw.github.io/personal-website/avatar.jpg",
+    expertise: ["Data Engineering", "GenAI / RAG", "Event-Driven Arch", "Cloud Infra"],
+    social: {
+      github: "https://github.com/alexstartw",
+      linkedin: "https://www.linkedin.com/in/liyu-lin-alex",
+      email: "alexstartw@gmail.com",
+    },
   },
 ] as const;
 

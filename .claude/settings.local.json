@@ -22,7 +22,23 @@
       "Bash(git diff:*)",
       "Bash(git stash:*)",
       "Bash(git log:*)",
-      "Bash(gh:*)"
+      "Bash(gh:*)",
+      "Bash(curl -s http://localhost:3008/zh-TW)",
+      "Bash(curl -s http://localhost:3008/en)",
+      "Bash(python3:*)",
+      "Bash(curl -s http://localhost:3008/zh-TW -o /dev/null -w \"%{http_code}\")",
+      "Bash(curl -s https://chien-sheng-liu.github.io/en/projects)",
+      "Bash(grep:*)",
+      "Bash(head -5 grep -n \"px-6\\\\|py-\\\\|px-8\" /Users/morris/Desktop/studio/src/components/sections/services.tsx)",
+      "Bash(head -5 grep -n \"px-6\\\\|py-\\\\|px-8\" /Users/morris/Desktop/studio/src/components/sections/process.tsx)",
+      "Bash(head -5 grep -n \"px-6\\\\|py-\\\\|px-8\" /Users/morris/Desktop/studio/src/components/sections/contact.tsx)",
+      "Bash(head -10 grep -n \"relative.*px-\\\\|<section\\\\|className=\"\"relative\" /Users/morris/Desktop/studio/src/components/sections/services.tsx)",
+      "Bash(head -10 grep -n \"relative.*px-\\\\|<section\\\\|className=\"\"relative\" /Users/morris/Desktop/studio/src/components/sections/process.tsx)",
+      "Bash(head -10 grep -n \"relative.*px-\\\\|<section\\\\|className=\"\"relative\" /Users/morris/Desktop/studio/src/components/sections/contact.tsx)",
+      "WebFetch(domain:chien-sheng-liu.github.io)",
+      "Bash(curl:*)",
+      "Bash(pkill -f \"next dev\")",
+      "Bash(node:*)"
     ]
   }
 }

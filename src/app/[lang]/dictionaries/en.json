@@ -4,6 +4,7 @@
     "services": "Services",
     "projects": "Projects",
     "process": "Process",
+    "team": "Team",
     "contact": "Contact",
     "startProject": "Start a Project",
     "toggleMenu": "Toggle navigation menu"
@@ -97,35 +98,94 @@
   "projects": {
     "label": "Selected Work",
     "heading": "Our Projects",
-    "viewCaseStudy": "View Case Study",
+    "viewDetails": "View Details",
     "keyMetrics": "Key Metrics",
+    "role": "Role",
+    "highlights": "Key Highlights",
+    "outcome": "Outcome",
+    "close": "Close",
     "projects": [
       {
         "title": "Stock Multi-Agent Financial Analyzer",
         "category": "LLM",
-        "description": "Financial analysis platform combining an LLM Gateway with Playwright browser automation. Multi-agent collaboration across news, finance, trader, and data agents with Safety Guard and full artifact traceability."
+        "description": "Financial analysis platform combining an LLM Gateway with Playwright browser automation. Multi-agent collaboration across news, finance, trader, and data agents with Safety Guard and full artifact traceability.",
+        "role": "Lead AI Engineer",
+        "highlights": [
+          "Built a modular multi-agent system with 4 specialized agents (news, finance, trader, data) orchestrated via a central LLM Gateway",
+          "Implemented 5-layer Safety Guard including prompt injection defense, hallucination detection, and structured output validation",
+          "Integrated Playwright for real-time web scraping of financial news, earnings reports, and live market data",
+          "Designed full artifact traceability: every agent decision, tool call, and intermediate result is logged and auditable"
+        ],
+        "outcome": "Reduced financial research turnaround time by ~70% while maintaining complete auditability across all AI-generated insights and trading signals."
       },
       {
         "title": "Maritime High-Risk & Anomaly Prediction",
         "category": "Deep Learning",
-        "description": "Integrated national weather, vessel static data, and real-time AIS streams into ClickHouse and deep learning to predict grounding and anomalous behaviors and help prevent maritime incidents."
+        "description": "Integrated national weather, vessel static data, and real-time AIS streams into ClickHouse and deep learning to predict grounding and anomalous behaviors and help prevent maritime incidents.",
+        "role": "Data Engineer & ML Engineer",
+        "highlights": [
+          "Fused 15+ heterogeneous data sources: national weather API, real-time AIS streams, vessel static registry, and port schedules",
+          "Built a real-time streaming pipeline with ClickHouse columnar storage, ingesting and querying 20TB+ of vessel movement history",
+          "Trained deep learning models to detect grounding risk and anomalous navigation patterns with high precision",
+          "Deployed entirely on-premises to comply with government maritime authority data sovereignty requirements"
+        ],
+        "outcome": "Delivered an early-warning system for high-risk vessel behaviors, actively supporting government maritime safety operations and reducing incident response time."
       },
       {
         "title": "Disrupted Time-Series Forecasting",
         "category": "Deep Learning",
-        "description": "Compared SARIMA, Holt-Winters, and Prophet under COVID-19 disruptions. Designed three experimental groups to quantify the impact of external shocks on time-series forecasting accuracy."
+        "description": "Compared SARIMA, Holt-Winters, and Prophet under COVID-19 disruptions. Designed three experimental groups to quantify the impact of external shocks on time-series forecasting accuracy.",
+        "role": "Data Scientist (Academic Research · University of Mannheim)",
+        "highlights": [
+          "Designed 3 experimental groups — pre-COVID baseline, during-disruption, and post-disruption recovery — for rigorous model comparison",
+          "Evaluated SARIMA, Holt-Winters, and Prophet across multiple real-world datasets under external shock conditions",
+          "Quantified accuracy degradation using RMSE and MAPE metrics, isolating the effect of structural breaks on each model",
+          "Conducted as graduate-level research at University of Mannheim, Germany"
+        ],
+        "outcome": "Findings showed Prophet's superior resilience during disruption while SARIMA demonstrated stronger accuracy during the post-pandemic recovery phase."
       },
       {
         "title": "Slot Game Engine & Probability Optimizer",
         "category": "Algorithm",
-        "description": "3x3 slot game engine combining Monte Carlo simulation with heuristic search to auto-optimize reel configurations under RTP 95% and win rate constraints. Full-stack with FastAPI backend and React frontend."
+        "description": "3×3 slot game engine combining Monte Carlo simulation with heuristic search to auto-optimize reel configurations under RTP 95% and win rate ≥55% constraints. Full-stack with FastAPI backend and React frontend.",
+        "role": "Full-Stack Engineer & Algorithm Designer",
+        "highlights": [
+          "Engineered a complete 3×3 slot game engine with configurable reel symbols, pay tables, and 5 distinct win patterns",
+          "Implemented Monte Carlo simulation (100K iterations) combined with heuristic search to auto-optimize reel strip configurations",
+          "Enforced dual constraints simultaneously: Return-to-Player (RTP) ≥ 95% and player win rate ≥ 55%",
+          "Built a full-stack interface with FastAPI backend and React frontend for real-time RTP visualization and simulation control"
+        ],
+        "outcome": "Automated the reel optimization process, reducing configuration time from days of manual calculation to minutes of automated search."
       },
       {
         "title": "AutoLLM — No-Code RAG Chatbot Platform",
         "category": "LLM",
-        "description": "Production-grade RAG platform with document upload, vector retrieval, multi-LLM switching, dual-layer Redis + PostgreSQL storage, and Docker microservice deployment."
+        "description": "Production-grade RAG platform with document upload, vector retrieval, multi-LLM switching, dual-layer Redis + PostgreSQL storage, and Docker microservice deployment.",
+        "role": "Full-Stack AI Engineer",
+        "highlights": [
+          "Designed a no-code RAG platform enabling non-technical users to build domain-specific chatbots by simply uploading documents",
+          "Built a dual-layer storage architecture: pgvector for semantic retrieval and Redis for session caching and conversation history",
+          "Implemented dynamic LLM provider switching across OpenAI, Gemini, and Claude via a unified API abstraction layer",
+          "Containerized all 5 microservices with Docker Compose for one-command deployment and horizontal scalability"
+        ],
+        "outcome": "Reduced chatbot deployment time from weeks to hours for non-technical teams, with 15+ production-ready API endpoints and multi-tenant document isolation."
       }
     ]
+  },
+  "team": {
+    "label": "Core Team",
+    "heading": "Meet the Team",
+    "roles": [
+      {
+        "role": "Founder & AI Strategist",
+        "bio": "Trilingual data and AI leader with 8-person team across Taiwan, Germany, and Hong Kong. 15+ analytics projects, NT$80M+ delivered value."
+      },
+      {
+        "role": "Senior Data Engineer",
+        "bio": "5+ years building event-driven architectures and TB-level data platforms. 10+ GenAI deployments, NT$50M+ project revenue."
+      }
+    ],
+    "viewPortfolio": "View Portfolio"
   },
   "process": {
     "label": "How We Work",
@@ -154,23 +214,27 @@
     ]
   },
   "contact": {
-    "label": "Get in Touch",
-    "heading": "Start a project with us",
-    "description": "Whether you're looking to optimize your data infrastructure or unlock new insights, we're ready to help.",
-    "form": {
-      "nameLabel": "Name",
-      "namePlaceholder": "Your name",
-      "emailLabel": "Email",
-      "emailPlaceholder": "you@company.com",
-      "messageLabel": "Project Details",
-      "messagePlaceholder": "Tell us about your project...",
-      "submitButton": "Send Message"
-    },
-    "success": {
-      "title": "Message Sent",
-      "message": "Thanks for reaching out! We'll get back to you within 24 hours."
-    },
-    "contactInfo": "or reach out directly at"
+    "label": "Let's Talk",
+    "heading": "Got a project? Let's chat",
+    "description": "Whether it's a data engineering project, AI strategy, or just exchanging ideas — we'd love to hear from you.",
+    "channels": [
+      {
+        "label": "Email",
+        "subtitle": "Fastest way to reach us",
+        "detail": "contact@mentarix.studio"
+      },
+      {
+        "label": "LinkedIn",
+        "subtitle": "Professional network",
+        "detail": "Mentarix Data Studio"
+      },
+      {
+        "label": "Book a Call",
+        "subtitle": "30 min / Google Calendar",
+        "detail": "Pick a time that works for you"
+      }
+    ],
+    "responseTime": "Usually reply within 24 hours"
   },
   "footer": {
     "rights": "All rights reserved."
