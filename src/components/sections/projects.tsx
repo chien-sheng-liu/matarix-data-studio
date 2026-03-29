@@ -628,7 +628,7 @@ export function ProjectsSection() {
   const category = dictProject?.category || project.category;
 
   return (
-    <section id="projects" ref={containerRef} className="relative px-6 py-10 lg:px-8 lg:py-14 overflow-hidden">
+    <section id="projects" ref={containerRef} className="relative px-6 py-10 lg:px-8 lg:py-16 overflow-hidden">
       <motion.div style={{ y: bgY }}
         className="absolute top-0 right-0 w-96 h-96 rounded-full bg-primary/5 blur-[128px] pointer-events-none" />
 
