@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useScroll, useTransform, useInView } from "framer-motion";
+import { motion, AnimatePresence, useScroll, useTransform, useInView } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 import { TextReveal } from "@/components/effects/text-reveal";
 import { useLocale } from "@/components/providers/locale-provider";
@@ -583,130 +583,12 @@ function parseMetric(metric: string) {
   return { value: parts ? parts[1] : metric, label: parts ? parts[2] : "" };
 }
 
-// ─── Project Row (alternating left/right) ─────────────────────────────────────
-function ProjectRow({ project, index, onOpen }: {
-  project: (typeof projects)[number]; index: number; onOpen: () => void;
-}) {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-80px" });
-  const { dictionary } = useLocale();
-  const dictProject = (dictionary.projects.projects as Array<{ title: string; category: string; description: string }>)[index];
-  const title = dictProject?.title || project.title;
-  const category = dictProject?.category || project.category;
-  const isEven = index % 2 === 0; // even: text left, viz right
-
-  const infoPanel = (
-    <motion.div
-      initial={{ opacity: 0, x: isEven ? -32 : 32 }}
-      animate={isInView ? { opacity: 1, x: 0 } : {}}
-      transition={{ duration: 0.7, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-      className="flex flex-col justify-center"
-    >
-      {/* Number + category */}
-      <div className="flex items-center gap-3 mb-5">
-        <span className="font-mono text-xs font-bold text-muted">{String(index + 1).padStart(2, "0")}</span>
-        <div className="h-px flex-1" style={{ backgroundColor: `${project.color}20` }} />
-        <span className="inline-block rounded-full px-3 py-1 text-xs font-mono tracking-wider"
-          style={{ color: project.color, backgroundColor: `${project.color}12`, border: `1px solid ${project.color}25` }}>
-          {category}
-        </span>
-      </div>
-
-      {/* Title */}
-      <h3 className="font-heading text-2xl lg:text-3xl font-bold leading-tight mb-4">
-        {title}
-      </h3>
-
-      {/* Description */}
-      <p className="text-sm text-muted leading-relaxed mb-6">
-        {dictProject?.description || project.description}
-      </p>
-
-      {/* Metrics */}
-      {"metrics" in project && (
-        <div className="flex gap-0 mb-6 rounded-xl border border-white/[0.06] overflow-hidden">
-          {(project.metrics as readonly string[]).map((m, j) => {
-            const { value, label } = parseMetric(m);
-            return (
-              <div key={j} className={`flex-1 py-3 px-3 text-center ${j > 0 ? "border-l border-white/[0.06]" : ""}`}>
-                <div className="font-heading text-sm font-bold" style={{ color: project.color }}>{value}</div>
-                <div className="text-xs text-muted mt-0.5">{label}</div>
-              </div>
-            );
-          })}
-        </div>
-      )}
-
-      {/* Tech tags */}
-      {"technologies" in project && (
-        <div className="flex flex-wrap gap-1.5 mb-6">
-          {(project.technologies as readonly string[]).slice(0, 5).map(tech => (
-            <span key={tech} className="text-xs px-2 py-0.5 rounded-md font-mono border"
-              style={{ color: `${project.color}BB`, borderColor: `${project.color}20`, backgroundColor: `${project.color}08` }}>
-              {tech}
-            </span>
-          ))}
-        </div>
-      )}
-
-      {/* CTA */}
-      <button onClick={onOpen}
-        className="group/cta inline-flex items-center gap-2 text-sm font-medium transition-colors duration-200"
-        style={{ color: project.color }}>
-        {dictionary.projects.viewDetails as string}
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"
-          className="transition-transform group-hover/cta:translate-x-1.5">
-          <path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
-        </svg>
-      </button>
-    </motion.div>
-  );
-
-  const vizPanel = (
-    <motion.div
-      initial={{ opacity: 0, x: isEven ? 32 : -32 }}
-      animate={isInView ? { opacity: 1, x: 0 } : {}}
-      transition={{ duration: 0.7, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
-      onClick={onOpen}
-      className="group cursor-pointer"
-    >
-      <div className="relative rounded-2xl overflow-hidden border bg-surface/20 hover:bg-surface/40 transition-all duration-300 p-4"
-        style={{ borderColor: `${project.color}18` }}>
-        {/* Accent top line */}
-        <div className="absolute top-0 left-0 right-0 h-0.5"
-          style={{ background: `linear-gradient(90deg, transparent, ${project.color}, transparent)` }} />
-        {/* Hover glow */}
-        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-          style={{ background: `radial-gradient(circle at 50% 30%, ${project.color}0C 0%, transparent 60%)` }} />
-        {/* Viz */}
-        <div className="relative rounded-xl overflow-hidden bg-background/40 border border-white/[0.04] p-3">
-          <ProjectViz index={index} color={project.color} isInView={isInView} />
-        </div>
-        {/* Live indicator */}
-        <div className="flex items-center justify-end gap-1.5 mt-3 pr-1">
-          <div className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ backgroundColor: project.color }} />
-          <span className="font-mono text-xs text-muted">LIVE</span>
-        </div>
-      </div>
-    </motion.div>
-  );
-
-  return (
-    <div ref={ref} className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-14 items-center">
-      {isEven ? (
-        <>
-          {infoPanel}
-          {vizPanel}
-        </>
-      ) : (
-        <>
-          {vizPanel}
-          {infoPanel}
-        </>
-      )}
-    </div>
-  );
-}
+// ─── Slide animation variants ─────────────────────────────────────────────────
+const slideVariants = {
+  enter: (dir: number) => ({ x: dir > 0 ? 48 : -48, opacity: 0 }),
+  center: { x: 0, opacity: 1 },
+  exit: (dir: number) => ({ x: dir > 0 ? -48 : 48, opacity: 0 }),
+};
 
 // ─── Section ──────────────────────────────────────────────────────────────────
 export function ProjectsSection() {
@@ -716,15 +598,43 @@ export function ProjectsSection() {
   const { dictionary } = useLocale();
   const { scrollYProgress } = useScroll({ target: containerRef, offset: ["start end", "end start"] });
   const bgY = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
-  const [selected, setSelected] = useState<{ index: number; side: "left" | "right" } | null>(null);
+
+  const [active, setActive] = useState(0);
+  const [direction, setDirection] = useState(1);
+  const [drawerOpen, setDrawerOpen] = useState(false);
+  const [paused, setPaused] = useState(false);
+  const sectionInView = useInView(containerRef, { margin: "-20%" });
+
+  const goTo = (idx: number) => {
+    if (idx === active) return;
+    setDirection(idx > active ? 1 : -1);
+    setActive(idx);
+  };
+
+  // Auto-advance every 4s when in view and not paused
+  useEffect(() => {
+    if (!sectionInView || paused || drawerOpen) return;
+    const id = setInterval(() => {
+      setDirection(1);
+      setActive(prev => (prev + 1) % projects.length);
+    }, 4000);
+    return () => clearInterval(id);
+  }, [sectionInView, paused, drawerOpen]);
+
+  const project = projects[active];
+  const dictProjects = dictionary.projects.projects as Array<{ title: string; category: string; description: string }>;
+  const dictProject = dictProjects[active];
+  const title = dictProject?.title || project.title;
+  const category = dictProject?.category || project.category;
 
   return (
-    <section id="projects" ref={containerRef} className="relative px-6 py-14 lg:px-8 lg:py-20 overflow-hidden">
+    <section id="projects" ref={containerRef} className="relative px-6 py-10 lg:px-8 lg:py-14 overflow-hidden">
       <motion.div style={{ y: bgY }}
         className="absolute top-0 right-0 w-96 h-96 rounded-full bg-primary/5 blur-[128px] pointer-events-none" />
 
       <div className="mx-auto max-w-6xl relative z-10">
-        <div ref={headerRef} className="text-center mb-16">
+        {/* Header */}
+        <div ref={headerRef} className="text-center mb-10">
           <motion.p
             initial={{ opacity: 0, y: 20 }} animate={headerInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6 }}
@@ -736,24 +646,191 @@ export function ProjectsSection() {
           </TextReveal>
         </div>
 
-        {/* Alternating rows */}
-        <div className="space-y-20 lg:space-y-28">
-          {projects.map((project, i) => (
-            <ProjectRow
-              key={project.title}
-              project={project}
-              index={i}
-              onOpen={() => setSelected({
-                index: i,
-                // Text left → drawer from right; text right → drawer from left
-                side: i % 2 === 0 ? "right" : "left",
-              })}
-            />
-          ))}
+        {/* Showcase card */}
+        <div
+          className="relative rounded-3xl border border-white/[0.07] bg-surface/10 overflow-hidden"
+          onMouseEnter={() => setPaused(true)}
+          onMouseLeave={() => setPaused(false)}
+        >
+          {/* Accent top line */}
+          <div className="absolute top-0 left-0 right-0 h-px"
+            style={{ background: `linear-gradient(90deg, transparent, ${project.color}80, transparent)`, transition: "background 0.5s" }} />
+          {/* Background glow */}
+          <div className="absolute inset-0 pointer-events-none transition-all duration-700"
+            style={{ background: `radial-gradient(ellipse at 70% 50%, ${project.color}08 0%, transparent 65%)` }} />
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-0 min-h-[420px]">
+            {/* Left: Info panel */}
+            <div className="relative flex flex-col justify-center px-8 py-10 lg:px-10 lg:border-r border-white/[0.05]">
+              <AnimatePresence mode="wait" custom={direction}>
+                <motion.div
+                  key={active}
+                  custom={direction}
+                  variants={slideVariants}
+                  initial="enter"
+                  animate="center"
+                  exit="exit"
+                  transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                >
+                  {/* Number + category */}
+                  <div className="flex items-center gap-3 mb-5">
+                    <span className="font-mono text-xs font-bold text-muted">{String(active + 1).padStart(2, "0")}</span>
+                    <div className="h-px flex-1" style={{ backgroundColor: `${project.color}25` }} />
+                    <span className="inline-block rounded-full px-3 py-1 text-xs font-mono tracking-wider"
+                      style={{ color: project.color, backgroundColor: `${project.color}12`, border: `1px solid ${project.color}30` }}>
+                      {category}
+                    </span>
+                  </div>
+
+                  {/* Title */}
+                  <h3 className="font-heading text-2xl lg:text-3xl font-bold leading-tight mb-4">
+                    {title}
+                  </h3>
+
+                  {/* Description */}
+                  <p className="text-sm text-muted leading-relaxed mb-6">
+                    {dictProject?.description || project.description}
+                  </p>
+
+                  {/* Metrics */}
+                  {"metrics" in project && (
+                    <div className="flex gap-0 mb-5 rounded-xl border border-white/[0.06] overflow-hidden">
+                      {(project.metrics as readonly string[]).map((m, j) => {
+                        const { value, label } = parseMetric(m);
+                        return (
+                          <div key={j} className={`flex-1 py-3 px-3 text-center ${j > 0 ? "border-l border-white/[0.06]" : ""}`}>
+                            <div className="font-heading text-sm font-bold" style={{ color: project.color }}>{value}</div>
+                            <div className="text-xs text-muted mt-0.5">{label}</div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  )}
+
+                  {/* Tech tags */}
+                  {"technologies" in project && (
+                    <div className="flex flex-wrap gap-1.5 mb-6">
+                      {(project.technologies as readonly string[]).slice(0, 5).map(tech => (
+                        <span key={tech} className="text-xs px-2 py-0.5 rounded-md font-mono border"
+                          style={{ color: `${project.color}BB`, borderColor: `${project.color}20`, backgroundColor: `${project.color}08` }}>
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+
+                  {/* CTA */}
+                  <button onClick={() => setDrawerOpen(true)}
+                    className="group/cta inline-flex items-center gap-2 text-sm font-medium transition-colors duration-200"
+                    style={{ color: project.color }}>
+                    {dictionary.projects.viewDetails as string}
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none"
+                      className="transition-transform group-hover/cta:translate-x-1.5">
+                      <path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </button>
+                </motion.div>
+              </AnimatePresence>
+            </div>
+
+            {/* Right: Viz panel */}
+            <div className="relative flex items-center justify-center p-6 lg:p-8">
+              <AnimatePresence mode="wait" custom={direction}>
+                <motion.div
+                  key={active}
+                  custom={direction}
+                  variants={slideVariants}
+                  initial="enter"
+                  animate="center"
+                  exit="exit"
+                  transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                  className="w-full cursor-pointer"
+                  onClick={() => setDrawerOpen(true)}
+                >
+                  <div className="relative rounded-2xl overflow-hidden border bg-background/50 p-4"
+                    style={{ borderColor: `${project.color}20` }}>
+                    <div className="absolute top-0 left-0 right-0 h-0.5"
+                      style={{ background: `linear-gradient(90deg, transparent, ${project.color}60, transparent)` }} />
+                    <div className="relative rounded-xl overflow-hidden bg-background/40 border border-white/[0.04] p-3">
+                      <ProjectViz index={active} color={project.color} isInView={true} />
+                    </div>
+                    <div className="flex items-center justify-end gap-1.5 mt-3 pr-1">
+                      <div className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ backgroundColor: project.color }} />
+                      <span className="font-mono text-xs text-muted">LIVE</span>
+                    </div>
+                  </div>
+                </motion.div>
+              </AnimatePresence>
+            </div>
+          </div>
+
+          {/* Bottom navigation */}
+          <div className="flex items-center justify-between px-8 py-4 lg:px-10 border-t border-white/[0.05]">
+            {/* Project tabs */}
+            <div className="flex items-center gap-1 overflow-x-auto scrollbar-none">
+              {projects.map((p, i) => (
+                <button
+                  key={i}
+                  onClick={() => goTo(i)}
+                  className="relative flex-shrink-0 flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all duration-200"
+                  style={{
+                    color: i === active ? p.color : "#64748B",
+                    backgroundColor: i === active ? `${p.color}12` : "transparent",
+                  }}
+                >
+                  <span className="font-bold">{String(i + 1).padStart(2, "0")}</span>
+                  <span className="hidden sm:inline truncate max-w-[100px]">{p.title.split(" ").slice(0, 2).join(" ")}</span>
+                  {i === active && (
+                    <>
+                      <motion.div
+                        layoutId="activeTab"
+                        className="absolute inset-0 rounded-lg"
+                        style={{ backgroundColor: `${p.color}10`, border: `1px solid ${p.color}25` }}
+                        transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                      />
+                      {/* Auto-advance progress bar */}
+                      {!paused && sectionInView && (
+                        <motion.div
+                          key={`progress-${active}`}
+                          className="absolute bottom-0 left-0 h-0.5 rounded-full"
+                          style={{ backgroundColor: p.color }}
+                          initial={{ width: "0%" }}
+                          animate={{ width: "100%" }}
+                          transition={{ duration: 4, ease: "linear" }}
+                        />
+                      )}
+                    </>
+                  )}
+                </button>
+              ))}
+            </div>
+
+            {/* Arrow navigation */}
+            <div className="flex items-center gap-2 ml-4 flex-shrink-0">
+              <button
+                onClick={() => goTo(Math.max(0, active - 1))}
+                disabled={active === 0}
+                className="w-8 h-8 rounded-lg border border-white/[0.08] flex items-center justify-center transition-all duration-200 disabled:opacity-25 hover:border-white/20 hover:bg-white/[0.04]"
+              >
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                  <path d="M9 2L4 7l5 5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </button>
+              <button
+                onClick={() => goTo(Math.min(projects.length - 1, active + 1))}
+                disabled={active === projects.length - 1}
+                className="w-8 h-8 rounded-lg border border-white/[0.08] flex items-center justify-center transition-all duration-200 disabled:opacity-25 hover:border-white/20 hover:bg-white/[0.04]"
+              >
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                  <path d="M5 2l5 5-5 5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </button>
+            </div>
+          </div>
         </div>
       </div>
 
-      <ProjectDrawer index={selected?.index ?? null} side={selected?.side ?? "right"} onClose={() => setSelected(null)} />
+      <ProjectDrawer index={drawerOpen ? active : null} side="right" onClose={() => setDrawerOpen(false)} />
     </section>
   );
 }
