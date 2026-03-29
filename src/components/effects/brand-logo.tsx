@@ -247,14 +247,20 @@ function ArtLetter({
       {/* The letter */}
       <span
         className="relative font-heading font-bold z-10"
-        style={{
-          color: phase >= 2 ? "var(--color-foreground)" : config.color,
-          transition: "color 1s ease",
-          textShadow:
-            phase < 2
-              ? `0 0 40px ${config.color}40`
-              : "none",
-        }}
+        style={
+          phase >= 2
+            ? {
+                background: `linear-gradient(170deg, #ffffff 0%, ${config.color} 100%)`,
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
+              }
+            : {
+                color: config.color,
+                transition: "color 1s ease",
+                textShadow: `0 0 40px ${config.color}40`,
+              }
+        }
       >
         {config.char}
       </span>
@@ -426,10 +432,11 @@ export function BrandLogo() {
                 height: "1.2em",
                 fontSize: "clamp(2.5rem, 10vw, 8rem)",
                 background:
-                  "linear-gradient(90deg, transparent 0%, rgba(99,102,241,0.12) 50%, transparent 100%)",
+                  "linear-gradient(90deg, transparent 0%, rgba(99,102,241,0.28) 50%, transparent 100%)",
                 backgroundSize: "200% 100%",
+                backgroundRepeat: "no-repeat",
               }}
-              animate={{ backgroundPosition: ["200% 0%", "-200% 0%"] }}
+              animate={{ backgroundPosition: ["-100% 0%", "200% 0%"] }}
               transition={{ duration: 2, ease: "easeInOut" }}
             />
           </motion.div>

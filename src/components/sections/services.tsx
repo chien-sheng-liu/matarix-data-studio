@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useInView } from "framer-motion";
+import { motion, AnimatePresence, useInView } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 import { SectionWrapper } from "@/components/ui/section-wrapper";
 import { TextReveal } from "@/components/effects/text-reveal";
@@ -22,133 +22,104 @@ const iconPaths: Record<string, string> = {
     "M14.25 6.087c0-.355.186-.676.401-.959.221-.29.349-.634.349-1.003 0-1.036-1.007-1.875-2.25-1.875s-2.25.84-2.25 1.875c0 .369.128.713.349 1.003.215.283.401.604.401.959v0a.64.64 0 01-.657.643 48.39 48.39 0 01-4.163-.3c.186 1.613.293 3.25.315 4.907a.656.656 0 01-.658.663v0c-.355 0-.676-.186-.959-.401a1.647 1.647 0 00-1.003-.349c-1.036 0-1.875 1.007-1.875 2.25s.84 2.25 1.875 2.25c.369 0 .713-.128 1.003-.349.283-.215.604-.401.959-.401v0c.31 0 .555.26.532.57a48.039 48.039 0 01-.642 5.056c1.518.19 3.058.309 4.616.354a.64.64 0 00.657-.643v0c0-.355-.186-.676-.401-.959a1.647 1.647 0 01-.349-1.003c0-1.035 1.008-1.875 2.25-1.875 1.243 0 2.25.84 2.25 1.875 0 .369-.128.713-.349 1.003-.215.283-.4.604-.4.959v0c0 .333.277.599.61.58a48.1 48.1 0 005.427-.63 48.05 48.05 0 00.582-4.717.532.532 0 00-.533-.57v0c-.355 0-.676.186-.959.401-.29.221-.634.349-1.003.349-1.035 0-1.875-1.007-1.875-2.25s.84-2.25 1.875-2.25c.37 0 .713.128 1.003.349.283.215.604.401.96.401v0a.656.656 0 00.658-.663 48.422 48.422 0 00-.37-5.36c-1.886.342-3.81.574-5.766.689a.578.578 0 01-.61-.58v0z",
 };
 
-const accentColors = ["#6366F1","#8B5CF6","#06B6D4","#10B981","#F59E0B","#EC4899"];
+const accentColors = ["#6366F1", "#8B5CF6", "#06B6D4", "#10B981", "#F59E0B", "#EC4899"];
 
-// Base bar heights per service (stable, no hydration issues)
 const baseHeights = [
-  [45, 70, 30, 85, 55, 90, 40, 65, 75, 50, 80, 35],
-  [60, 40, 80, 55, 70, 35, 90, 45, 65, 75, 50, 85],
-  [35, 80, 50, 70, 40, 90, 60, 45, 75, 55, 85, 30],
-  [75, 45, 85, 35, 65, 80, 50, 90, 40, 70, 55, 60],
-  [50, 85, 40, 75, 60, 35, 80, 55, 90, 45, 70, 65],
-  [80, 35, 65, 90, 45, 70, 55, 85, 40, 60, 75, 50],
+  [45, 70, 30, 85, 55, 90, 40, 65, 75, 50, 80, 35, 60, 45, 88, 42, 72, 58],
+  [60, 40, 80, 55, 70, 35, 90, 45, 65, 75, 50, 85, 38, 68, 48, 82, 52, 78],
+  [35, 80, 50, 70, 40, 90, 60, 45, 75, 55, 85, 30, 72, 42, 88, 58, 44, 66],
+  [75, 45, 85, 35, 65, 80, 50, 90, 40, 70, 55, 60, 48, 82, 36, 74, 62, 52],
+  [50, 85, 40, 75, 60, 35, 80, 55, 90, 45, 70, 65, 38, 78, 52, 42, 88, 58],
+  [80, 35, 65, 90, 45, 70, 55, 85, 40, 60, 75, 50, 88, 42, 68, 56, 36, 76],
 ];
 
-// Continuously animated bar chart per card
-function LiveBars({ color, isActive }: { color: string; isActive: boolean }) {
-  const [heights, setHeights] = useState(baseHeights[0]);
-  const indexRef = useRef(0);
-
-  useEffect(() => {
-    const base = baseHeights[indexRef.current];
-    const interval = isActive ? 300 : 900;
-    const id = setInterval(() => {
-      setHeights(base.map(h => {
-        const jitter = (Math.random() - 0.5) * (isActive ? 40 : 18);
-        return Math.max(10, Math.min(100, h + jitter));
-      }));
-    }, interval);
-    return () => clearInterval(id);
-  }, [isActive]);
-
-  return (
-    <div className="flex gap-0.5 items-end h-7">
-      {heights.map((h, j) => (
-        <motion.div
-          key={j}
-          className="flex-1 rounded-full"
-          style={{ backgroundColor: color, opacity: isActive ? 0.3 + (h / 100) * 0.7 : 0.18 }}
-          animate={{ height: `${h}%` }}
-          transition={{ duration: isActive ? 0.25 : 0.7, ease: "easeInOut" }}
-        />
-      ))}
-    </div>
-  );
-}
-
-// Wrapper to assign stable index to each LiveBars instance
-function ServiceCard({
-  service, i, isInView, color, dictService,
-}: {
-  service: (typeof services)[number];
-  i: number;
-  isInView: boolean;
-  color: string;
-  dictService: { title: string; description: string };
-}) {
-  const [isActive, setIsActive] = useState(false);
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 24, scale: 0.95 }}
-      animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
-      transition={{ duration: 0.5, delay: 0.1 + i * 0.08, ease: [0.16, 1, 0.3, 1] }}
-      onMouseEnter={() => setIsActive(true)}
-      onMouseLeave={() => setIsActive(false)}
-      className="group cursor-default rounded-2xl border border-border/50 p-5 bg-background/60 backdrop-blur-sm transition-all duration-300"
-      style={{
-        borderColor: isActive ? `${color}40` : undefined,
-        background: isActive ? `${color}08` : undefined,
-      }}
-    >
-      {/* Top row: icon + number */}
-      <div className="flex items-center justify-between mb-4">
-        <motion.div animate={{ scale: isActive ? 1.15 : 1, rotate: isActive ? 5 : 0 }} transition={{ duration: 0.3 }}>
-          <svg className="w-6 h-6 transition-colors duration-300" fill="none" viewBox="0 0 24 24"
-            stroke={isActive ? color : "#64748B"} strokeWidth={1.5}>
-            <motion.path strokeLinecap="round" strokeLinejoin="round" d={iconPaths[service.icon]}
-              initial={{ pathLength: 0 }}
-              animate={isInView ? { pathLength: 1 } : {}}
-              transition={{ duration: 1.5, delay: 0.3 + i * 0.15, ease: [0.16, 1, 0.3, 1] }}
-            />
-          </svg>
-        </motion.div>
-        <span className="font-mono text-xs font-bold transition-colors duration-300"
-          style={{ color: isActive ? color : "#64748B" }}>
-          {String(i + 1).padStart(2, "0")}
-        </span>
-      </div>
-
-      <h3 className="font-heading text-base font-semibold mb-2 transition-colors duration-300 leading-snug"
-        style={{ color: isActive ? color : undefined }}>
-        {dictService.title}
-      </h3>
-
-      <p className="text-xs text-muted leading-relaxed mb-4">{dictService.description}</p>
-
-      <LiveBarsForIndex serviceIndex={i} color={color} isActive={isActive} />
-    </motion.div>
-  );
-}
-
-// Each service gets its own stable base heights
-function LiveBarsForIndex({ serviceIndex, color, isActive }: { serviceIndex: number; color: string; isActive: boolean }) {
+// Live bars visualization for the preview panel
+function PreviewBars({ serviceIndex, color }: { serviceIndex: number; color: string }) {
   const base = baseHeights[serviceIndex];
   const [heights, setHeights] = useState(base);
 
   useEffect(() => {
-    const interval = isActive ? 280 : 850;
     const id = setInterval(() => {
       setHeights(base.map(h => {
-        const jitter = (Math.random() - 0.5) * (isActive ? 38 : 16);
+        const jitter = (Math.random() - 0.5) * 32;
         return Math.max(8, Math.min(100, h + jitter));
       }));
-    }, interval);
+    }, 220);
     return () => clearInterval(id);
-  }, [isActive, base]);
+  }, [base]);
 
   return (
-    <div className="flex gap-0.5 items-end h-7">
+    <div className="flex gap-1 items-end h-16">
       {heights.map((h, j) => (
         <motion.div
           key={j}
           className="flex-1 rounded-full"
-          style={{ backgroundColor: color, opacity: isActive ? 0.25 + (h / 100) * 0.75 : 0.15 }}
+          style={{ backgroundColor: color, opacity: 0.25 + (h / 100) * 0.75 }}
           animate={{ height: `${h}%` }}
-          transition={{ duration: isActive ? 0.22 : 0.65, ease: "easeInOut" }}
+          transition={{ duration: 0.2, ease: "easeInOut" }}
         />
       ))}
     </div>
+  );
+}
+
+// Right-side preview panel
+function ServicePreview({
+  service, i, color, dictService,
+}: {
+  service: (typeof services)[number];
+  i: number;
+  color: string;
+  dictService: { title: string; description: string };
+}) {
+  return (
+    <motion.div
+      key={i}
+      initial={{ opacity: 0, y: 16 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -16 }}
+      transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+      className="h-full flex flex-col justify-between p-8 lg:p-10"
+    >
+      {/* Top: icon */}
+      <div>
+        <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl mb-6"
+          style={{ backgroundColor: `${color}15`, border: `1px solid ${color}25` }}>
+          <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke={color} strokeWidth={1.4}>
+            <motion.path
+              strokeLinecap="round" strokeLinejoin="round"
+              d={iconPaths[service.icon]}
+              initial={{ pathLength: 0 }}
+              animate={{ pathLength: 1 }}
+              transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+            />
+          </svg>
+        </div>
+
+        <div className="flex items-center gap-3 mb-3">
+          <span className="font-mono text-xs font-bold" style={{ color }}>{String(i + 1).padStart(2, "0")}</span>
+          <div className="h-px flex-1" style={{ backgroundColor: `${color}25` }} />
+        </div>
+
+        <h3 className="font-heading text-2xl lg:text-3xl font-bold mb-4 leading-tight"
+          style={{ color }}>
+          {dictService.title}
+        </h3>
+
+        <p className="text-sm text-muted leading-relaxed">
+          {dictService.description}
+        </p>
+      </div>
+
+      {/* Bottom: live bars */}
+      <div className="mt-8">
+        <div className="flex items-center gap-2 mb-3">
+          <div className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ backgroundColor: color }} />
+          <span className="font-mono text-xs text-muted">LIVE ACTIVITY</span>
+        </div>
+        <PreviewBars serviceIndex={i} color={color} />
+      </div>
+    </motion.div>
   );
 }
 
@@ -156,6 +127,10 @@ export function ServicesSection() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const { dictionary } = useLocale();
+  const [active, setActive] = useState(0);
+
+  const dictServices = dictionary.services.services as Array<{ title: string; description: string }>;
+  const activeColor = accentColors[active];
 
   return (
     <SectionWrapper id="services" className="bg-surface/30">
@@ -173,21 +148,95 @@ export function ServicesSection() {
           {dictionary.services.heading}
         </TextReveal>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {services.map((service, i) => {
-            const color = accentColors[i % accentColors.length];
-            const dictService = (dictionary.services.services as Array<{ title: string; description: string }>)[i];
-            return (
-              <ServiceCard
-                key={`service-${i}`}
-                service={service}
-                i={i}
-                isInView={isInView}
-                color={color}
-                dictService={dictService || { title: service.title, description: service.description }}
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.2fr] gap-4 lg:gap-6">
+          {/* Left: service list */}
+          <div className="rounded-2xl border border-white/[0.07] overflow-hidden">
+            {services.map((service, i) => {
+              const color = accentColors[i];
+              const isActive = active === i;
+              const dictService = dictServices[i] || { title: service.title, description: service.description };
+              return (
+                <motion.button
+                  key={i}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={isInView ? { opacity: 1, x: 0 } : {}}
+                  transition={{ duration: 0.5, delay: 0.08 * i, ease: [0.16, 1, 0.3, 1] }}
+                  onMouseEnter={() => setActive(i)}
+                  onClick={() => setActive(i)}
+                  className="w-full flex items-center gap-5 px-6 py-4 text-left transition-colors duration-200 relative"
+                  style={{
+                    backgroundColor: isActive ? `${color}0C` : "transparent",
+                    borderBottom: i < services.length - 1 ? "1px solid rgba(255,255,255,0.05)" : "none",
+                  }}
+                >
+                  {/* Active left bar */}
+                  <motion.div
+                    className="absolute left-0 top-0 bottom-0 w-0.5 rounded-full"
+                    style={{ backgroundColor: color }}
+                    animate={{ opacity: isActive ? 1 : 0, scaleY: isActive ? 1 : 0 }}
+                    transition={{ duration: 0.25 }}
+                  />
+
+                  {/* Number */}
+                  <span className="font-mono text-xs font-bold w-7 flex-shrink-0 transition-colors duration-200"
+                    style={{ color: isActive ? color : "#475569" }}>
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+
+                  {/* Icon */}
+                  <div className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 transition-all duration-200"
+                    style={{
+                      backgroundColor: isActive ? `${color}15` : "transparent",
+                      border: `1px solid ${isActive ? `${color}30` : "transparent"}`,
+                    }}>
+                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24"
+                      stroke={isActive ? color : "#64748B"} strokeWidth={1.6}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d={iconPaths[service.icon]} />
+                    </svg>
+                  </div>
+
+                  {/* Title */}
+                  <span className="font-heading text-sm font-semibold flex-1 transition-colors duration-200"
+                    style={{ color: isActive ? color : undefined }}>
+                    {dictService.title}
+                  </span>
+
+                  {/* Arrow */}
+                  <motion.svg
+                    width="14" height="14" viewBox="0 0 14 14" fill="none"
+                    animate={{ x: isActive ? 2 : 0, opacity: isActive ? 1 : 0.3 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <path d="M1 7h12M8 2l5 5-5 5" stroke={isActive ? color : "currentColor"}
+                      strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+                  </motion.svg>
+                </motion.button>
+              );
+            })}
+          </div>
+
+          {/* Right: preview panel */}
+          <div className="relative rounded-2xl border overflow-hidden min-h-[360px]"
+            style={{ borderColor: `${activeColor}20`, backgroundColor: `${activeColor}05`,
+              transition: "border-color 0.4s, background-color 0.4s" }}>
+            {/* Accent top line */}
+            <div className="absolute top-0 left-0 right-0 h-px transition-all duration-400"
+              style={{ background: `linear-gradient(90deg, transparent, ${activeColor}70, transparent)` }} />
+            {/* Background glow */}
+            <div className="absolute inset-0 pointer-events-none"
+              style={{ background: `radial-gradient(ellipse at 30% 30%, ${activeColor}08 0%, transparent 60%)`,
+                transition: "background 0.4s" }} />
+
+            <AnimatePresence mode="wait">
+              <ServicePreview
+                key={active}
+                service={services[active]}
+                i={active}
+                color={activeColor}
+                dictService={dictServices[active] || { title: services[active].title, description: services[active].description }}
               />
-            );
-          })}
+            </AnimatePresence>
+          </div>
         </div>
       </div>
     </SectionWrapper>
