@@ -18,12 +18,14 @@ export function ProjectDrawer({ index, side, onClose }: ProjectDrawerProps) {
   // Escape key + body scroll lock
   useEffect(() => {
     if (index === null) return;
-    const prev = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
+    const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+    document.documentElement.style.overflow = "hidden";
+    document.documentElement.style.paddingRight = `${scrollbarWidth}px`;
     const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") onClose(); };
     window.addEventListener("keydown", onKey);
     return () => {
-      document.body.style.overflow = prev;
+      document.documentElement.style.overflow = "";
+      document.documentElement.style.paddingRight = "";
       window.removeEventListener("keydown", onKey);
     };
   }, [index, onClose]);
@@ -54,7 +56,7 @@ export function ProjectDrawer({ index, side, onClose }: ProjectDrawerProps) {
 
           {/* Drawer */}
           <motion.aside
-            className={`fixed inset-y-0 z-50 w-full max-w-xl flex flex-col
+            className={`fixed inset-y-0 z-50 w-full max-w-xl flex flex-col overflow-hidden
                        bg-[#0A0A0F]/95 backdrop-blur-xl
                        ${isLeft ? "left-0 border-r border-white/[0.08]" : "right-0 border-l border-white/[0.08]"}`}
             initial={{ x: isLeft ? "-100%" : "100%" }}
@@ -66,7 +68,7 @@ export function ProjectDrawer({ index, side, onClose }: ProjectDrawerProps) {
             <div className="flex-shrink-0 h-0.5 w-full" style={{ background: `linear-gradient(90deg, transparent, ${project.color}, transparent)` }} />
 
             {/* Scrollable content area */}
-            <div className="flex-1 min-h-0 overflow-y-auto">
+            <div className="flex-1 min-h-0 overflow-y-auto overscroll-contain" data-lenis-prevent>
               <div className="p-8 pb-16">
                 {/* Header */}
                 <div className="flex items-start justify-between mb-8">
